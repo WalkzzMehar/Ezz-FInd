@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="main/Css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Source Sans Pro' rel='stylesheet'>
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <title>Online Shopping Navbar</title>
+</head>
+
+<body>
+
+
+  <div id="preloder">
+    <div class="loader"></div>
+</div>
+
+  <!---->
+  <div class="navbar">
+    <a href="index.html" class="logo">Logo</a>
+    <div class="location-btn">
+      <div class="location-nav"><i class="fa-solid fa-location-dot"></i>
+        <div id="location-pop">Set Your <br>Location</div>
+      </div>
+    </div>
+<button id="loc-done" class="loc-done">
+  <i class="fa-solid fa-location-dot"></i>
+</button>
+
+
+    <div id="overlay">
+      <div id="loc-popup" class="loc-popup">
+        <div class="pop-header">
+          <h2>Choose your location</h2>
+          <button class="closePopupButton"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="pop-main">
+          <div>
+            <p>Delivery options and delivery speeds may vary for different locations</p>
+          </div>
+          <div>
+            <form onsubmit="return getCity()" class="zip-code">
+              <label for="zip">Zip Code:</label>
+              <div class="zip-zip">
+                <input type="text" id="zip" name="zip" required>
+                <button type="submit" class="zip-sub-btn">Submit</button>
+              </div>
+            </form>
+            <p id="result"></p>
+          </div>
+          <div class="dropdown-shiping-container">
+            <label>Ship outside:</label>
+            <input type="text" placeholder="Select or type a country..." id="countryInput" onclick="toggleDropdown()">
+            <div id="shiping-dropdown" class="shiping-dropdown">
+              <a href="#" onclick="selectCountry('United States')">United States</a>
+              <a href="#" onclick="selectCountry('Canada')">Canada</a>
+              <a href="#" onclick="selectCountry('United Kingdom')">United Kingdom</a>
+              <a href="#" onclick="selectCountry('Australia')">Australia</a>
+              <a href="#" onclick="selectCountry('Germany')">Germany</a>
+            </div>
+          </div>
+          
+          
+        </div>
+        <div class="pop-footer">
+          <div class="main-pop-btn">
+            <a href="Location.html"><button class="google-pop-btn"><img src="main/assets/google-icon.png" height="20px" width="20px">Search on Google Maps</button></a>
+            <button class="professional-btn">Done</button>
+          </div>
+        </div>
+      </div>
+    
+      <div id="success-popup" class="success-popup">
+        <h2>Success</h2>
+        <p>Your location has been set successfully!</p>
+      </div>
+    </div>
+
+    
+
+
+
+    <!--searchbar-starts-->
+    <div class="search-container">
+      <form action="/search" method="get" class="search-form">
+        <div class="search-dropdown">
+          <select name="searchType" class="search-select" id="search-select" onchange="updatePlaceholder()">
+            <option value="all">All</option>
+            <option value="products">Products</option>
+            <option value="categories">Categories</option>
+            <option value="brands">Brands</option>
+          </select>
+        </div>
+        
+        <input type="text" name="query" class="search-input" id="search-input" placeholder="Search Anything...">
+        <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+      
+        
+      </form>
+    </div>
+    <!--searchbar-end-->
+
+
+
+
+
+   
+  
+
+
+
+
+
+    <div class="a-grade">
+      <a class="ReturnOrOrder-nav" href="">Return <br> <B class="io">& Order</B></a>
+    </div>
+    <div class="a-grade">
+      <a class="account-nav" href="login.html"><i class="fa-solid fa-user"></i>Account</a>
+    </div>
+
+    
+      <div class="cart-nav" id="cart-nav">
+        <div id="loc-done" class="after-search-icon"><i class="fa-solid fa-location-dot"></i></div>
+        <div class="cart">
+          <button id="cartButton">
+            <i class="fas fa-shopping-cart"></i> $<span id="cartTotal">0.00</span>
+          </button>
+          <div id="cartDropdown" class="cart-dropdown">
+            <ul id="cartItems"></ul>
+            <div class="cart-total">
+              Total: $<span id="cartTotalDropdown">0.00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <div class="sub-navbar">
+    <div class="sub-dropdown">
+      <div onclick="toggleDropdown(event)">
+        <a href="#" class="sub-dropdown-link">All <i class="fas fa-chevron-down"></i></a>
+      </div>
+      <div class="dropdown-content">
+        <a href="#">Service 1</a>
+        <a href="#">Service 2</a>
+        <a href="#">Service 3</a>
+        <a href="#">Service 4</a>
+        <a href="#">Service 5</a>
+        <a href="#">Service 6</a>
+        <a href="#">Service 7</a>
+        <a href="#">Service 8</a>
+        <a href="#">Service 9</a>
+        <a href="#">Service 10</a>
+      </div>
+    </div>
+    <a href="#">Hot Deals</a>
+    <a href="login.html">Sell</a>
+    <a href="myStore.html">Create Store</a>
+    <a href="customer-services.html">Customer Services</a>
+  </div>
+
+  <!--nav end-->
+  <main>
+    <div class="bg-slider">
+      <div class="bg-slider-1 fade" style="display: block;">
+        <div class="bg-img-content">
+          <h1 style="font-family: 'fantasy', sans-serif;">Elevate Your Style with<br> Online Fashion Shopping</h1>
+          <P>Welcome to <u style="text-decoration: underline; cursor: pointer;">Ezz-Find</u>, where fashion meets convenience.<br> Discover the latest trends and timeless classics curated for every occasion.<br> Shop effortlessly from home and redefine your wardrobe with our<br> stylish collection.</P>
+        </div>
+        <img src="main/assets/bg-1.jpg" class="bg-img" style="width: 100%; height: 100%;">
+      </div>
+      <div class="bg-slider-1 fade">
+        <div class="bg-img-content">
+          <h1>Refine Your Style with<br> Online Accessories</h1>
+          <P> Discover a carefully curated selection of stylish accessories that<br> effortlessly complement your personal style. Shop conveniently<br> from home and elevate your look with our versatile collection.
+            </P>
+        </div>
+        <img src="main/assets/bg-2.jpg" class="bg-img" style="width: 100%; height: 100%;">
+      </div>
+      <div class="bg-slider-1 fade">
+        <div class="bg-img-content">
+          <h1>Thoughtful Gifts for<br> Every Occasion</h1>
+          <P>Explore our curated selection of gifts designed for every special occasion.<br> Whether you're celebrating a birthday, anniversary, or another milestone,<br> find the perfect present from our diverse collection.</P>
+        </div>
+        <img src="main/assets/bg-3.jpg" class="bg-img" style="width: 100%; height: 100%;">
+      </div>
+
+      <a class="bg-prev" onclick="plusSlides(-1)">&#10094;</a>
+      <a class="bg-next" onclick="plusSlides(1)">&#10095;</a>
+
+
+      <div class="dotsbox" style="text-align: center;">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+      </div>
+    </div>
+
+    <div class="event-cards" data-aos="fade-down">
+      <div class="event-col" data-aos="fade-down">
+        <div class="event-card-1" data-aos="fade-up">
+          <a href="#">
+          <img src="main/assets/grid-event1.jfif" alt="Event Image 1">
+        </a>
+        </div>
+        <div class="event-card-1" data-aos="fade-up">
+          <a href="#">
+          <img src="main/assets/grid-event2.jfif" alt="Event Image 2">
+        </a>
+        </div>
+        <div class="event-card-1" data-aos="fade-up">
+          <a href="#">
+          <img src="main/assets/grid-event3.jfif" alt="Event Image 3">
+        </a>
+        </div>
+      </div>
+      <div class="event-col" data-aos="fade-down">
+        <div class="event-card-2" data-aos="fade-up">
+          <a href="#">
+          <img src="main/assets/grid-event4.jfif" alt="Event Image 4">
+        </a>
+        </div>
+        <div class="center-event" data-aos="fade-up">
+          <div class="event-card-2" data-aos="fade-up">
+            <a href="#">
+            <img src="main/assets/grid-event5.jfif" alt="Event Image 5">
+          </a>
+          </div>
+          <div class="event-card-2" data-aos="fade-up">
+            <a href="#">
+            <img src="main/assets/grid-event6.jfif" alt="Event Image 6">
+          </a>
+          </div>
+        </div>
+        <div class="event-card-2" id="small-event" data-aos="fade-up">
+          <a href="#">
+          <img src="main/assets/grid-event7.jfif" alt="Event Image 7">
+        </a>
+        </div>
+      </div>
+      <div class="event-col" data-aos="fade-down">
+        <div class="event-card-3" data-aos="fade-up">
+          <a href="#">
+          <img src="main/assets/grid-event8.jfif" alt="Event Image 8">
+        </a>
+        </div>
+        <div class="event-card-3" data-aos="fade-up">
+          <a href="#">
+          <img src="main/assets/grid-event9.png" alt="Event Image 9">
+        </a>
+        </div>
+        <div class="event-card-3" data-aos="fade-up">
+          <a href="#">
+          <img src="main/assets/grid-event10.jfif" alt="Event Image 10">
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    
+    </div>
+
+
+    <div class="slider-container">
+      <h2 class="slider-heading">Face care Products</h2>
+      <div class="slider" id="slider">
+        <!-- Repeat this div for each product -->
+        <div class="product"><a href="#"><img class="pd-img-setting" src="main/assets/Products-imgs/facepd1.png"></a></div>
+        <div class="product"><a href="#"><img class="pd-img-setting" src="main/assets/Products-imgs/facepd2.png"></a></div>
+        <div class="product"><a href="#"><img class="pd-img-setting" src="main/assets/Products-imgs/facepd3.png"></a></div>
+        <div class="product"><a href="#"><img class="pd-img-setting" src="main/assets/Products-imgs/facepd4.png"></a></div>
+        <div class="product"><a href="#"><img class="pd-img-setting" src="main/assets/Products-imgs/facepd5.png"></a></div>
+        <div class="product"><a href="#"><img class="pd-img-setting" src="main/assets/Products-imgs/facepd6.png"></a></div>
+        <div class="product"><a href="#"><img class="pd-img-setting" src="main/assets/Products-imgs/facepd7.png"></a></div>
+        <div class="product"><a href="#"><img class="pd-img-setting" src="main/assets/Products-imgs/facepd8.png"></a></div>
+        <div class="product"><a href="#"><img class="pd-img-setting" src="main/assets/Products-imgs/facepd9.png"></a></div>
+        <div class="product"><a href="#"><img class="pd-img-setting" src="main/assets/Products-imgs/facepd10.png"></a></div>
+        <div class="product"><a href="#"><img class="pd-img-setting" src="main/assets/Products-imgs/facepd11.png"></a></div>
+        <div class="product"><a href="#"><img class="pd-img-setting" src="main/assets/Products-imgs/facepd12.png"></a></div>
+        <div class="product"><a href="#"><img class="pd-img-setting" src="main/assets/Products-imgs/facepd13.png"></a></div>
+        <div class="product"><a href="#"><img class="pd-img-setting" src="main/assets/Products-imgs/facepd14.png"></a></div>
+        <div class="product"><a href="#"><img class="pd-img-setting" src="main/assets/Products-imgs/facepd15.png"></a></div>
+        <div class="product"><a href="#"><img class="pd-img-setting" src="main/assets/Products-imgs/facepd16.png"></a></div>
+        <div class="product"><a href="#"><img class="pd-img-setting" src="main/assets/Products-imgs/facepd17.png"></a></div>
+        <div class="product"><a href="#"><img class="pd-img-setting" src="main/assets/Products-imgs/facepd18.png"></a></div>
+        <div class="product"><a href="#"><img class="pd-img-setting" src="main/assets/Products-imgs/facepd19.png"></a></div>
+        <div class="product"><a href="#"><img class="pd-img-setting" src="main/assets/Products-imgs/facepd20.png"></a></div>
+      </div>
+      <div class="nav-buttons">
+        <button id="prevButton1" onclick="prevSlide()"><i class="fas fa-chevron-left"></i></button>
+        <button id="nextButton1" onclick="nextSlide()"><i class="fas fa-chevron-right"></i></button>
+      </div>
+    </div>
+
+
+    <div class="grid-container">
+      <div class="grid-item">
+        <div class="grid-item-style1">
+          <h3 class="card-heading">Gaming accessories</h3>
+          <div class="style1-main">
+            <a href="main/keyboard.html"><img src="main/assets/Products-imgs/keyboard-main.jfif">Keyboards</a>
+            <a href="main/mouse.html"><img src="main/assets/Products-imgs/mouse-main.jfif">Mouse</a>
+            <a href="main/chair.html"><img src="main/assets/Products-imgs/gchair-main.jfif">Chairs</a>
+            <a href="main/headset.html"><img src="main/assets/Products-imgs/headset-main.jfif">Headsets</a>
+          </div>
+          <div class="card-link">Seen more</div>
+        </div>
+      </div>
+      <div class="grid-item">
+        <div class="grid-item-style1">
+          <h3 class="card-heading">Top Fashion products</h3>
+          <div class="style1-main">
+            <a href="main/shoes.html"><img src="main/assets/Products-imgs/shoes-main.jfif">Shoes</a>
+            <a href="main/dresses.html"><img src="main/assets/Products-imgs/dress-main.jfif">Dresses</a>
+            <a href="main/jean.html"><img src="main/assets/Products-imgs/jean-main.jfif">Jeans</a>
+            <a href="main/perfume.html"><img src="main/assets/Products-imgs/perfume-main.jfif">Perfume</a>
+          </div>
+          <div class="card-link">Seen more</div>
+        </div>
+      </div>
+      <div class="grid-item" id="second-none">
+        <div class="grid-item-style2">
+          <h3 class="card-heading">Deal in PCs </h3>
+          <div class="style2-main">
+            <a href="main/pc.html"><img src="main/assets/Products-imgs/pc-main.jfif"></a>
+          </div>
+          <a class="card-link-1">Seen more</a>
+        </div>
+      </div>
+      <div class="grid-item">
+        <div class="grid-item-style1">
+          <h3 class="card-heading">Home accessories</h3>
+          <div class="style1-main">
+            <a href="main/furniture.html"><img src="main/assets/Products-imgs/furniture-main.jfif">Furniture</a>
+            <a href="main/dining.html"><img src="main/assets/Products-imgs/dining-main.jfif">dining</a>
+            <a href="main/care.html"><img src="main/assets/Products-imgs/heath-main.jfif">Health and Beauty</a>
+            <a href="main/bathroom.html"><img src="main/assets/Products-imgs/bathroam-main.jfif">Bathroom</a>
+          </div>
+          <div class="card-link">Seen more</div>
+        </div>
+      </div>
+      <div class="grid-item">
+        <div class="grid-item-style1">
+          <h3 class="card-heading">Best eletronic Products</h3>
+          <div class="style1-main">
+            <a href="main/smartPhone.html"><img src="main/assets/Products-imgs/phone-main.jfif">Smart-phone</a>
+            <a href="main/tv.html"><img src="main/assets/Products-imgs/tv-main.jfif">TVs</a>
+            <a href="main/laptop.html"><img src="main/assets/Products-imgs/laptop-main.jfif">Laptops</a>
+            <a href="main/tablet.html"><img src="main/assets/Products-imgs/tablet-main.jfif">tablets</a>
+          </div>
+          <div class="card-link">Seen more</div>
+        </div>
+      </div>
+      <div class="grid-item" id="third-none">
+        <div class="grid-item-style2">
+          <h3 class="card-heading">Hot Wheels </h3>
+          <div class="style2-main">
+            <a href="main/hotwheel.html"><img src="main/assets/Products-imgs/hot-wheel-main.png"></a>
+          </div>
+          <a class="card-link-1">Seen more</a>
+        </div>
+      </div>
+      <div class="grid-item">
+        <div class="grid-item-style1">
+          <h3 class="card-heading">Tranding Fashions</h3>
+          <div class="style1-main">
+            <a href="main/jecket.html"><img src="main/assets/Products-imgs/jecket-main.jfif">Jeckets</a>
+            <a href="main/t-shirt.html"><img src="main/assets/Products-imgs/tshirt-main.jfif">T-shirts</a>
+            <a href="main/jelw.html"><img src="main/assets/Products-imgs/jew-main.jfif">Jewellery</a>
+            <a href="main/hoodie.html"><img src="main/assets/Products-imgs/hoodie-main.jfif"> Hoodies</a>
+          </div>
+          <div class="card-link">Seen more</div>
+        </div>
+      </div>
+      <div class="grid-item">
+        <div class="grid-item-style2">
+          <h3 class="card-heading">Toys under 25$</h3>
+          <div class="style2-main">
+            <a href="main/softToys.html"><img src="main/assets/Products-imgs/toy-main.jfif"></a>
+          </div>
+          <a class="card-link-1">Seen more</a>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <div class="price-slider">
+      <p class="price-slider-heading">Gym Equqiments</p>
+      <div class="product-slider-container">
+        <div class="product-slider" id="uniqueProductSlider">
+          <div class="product-card" data-id="1" data-price="10.00" data-image="main/assets/Products-imgs/gym-img1.png">
+            <div class="img-container">
+              <img src="main/assets/Products-imgs/gym-img1.png" alt="Product 1">
+              <div class="favorite-btn"><i class="fa-solid fa-heart"></i></div>
+            </div>
+            <div class="card-content">
+              <p class="card-content-price">$10.00</p>
+              <a href="main/handGripler.html" class="card-content-info"><b class="card-content-name">Hand Gripler</b>, dolor sit amet consectetur
+                adipisicing elit. Consequuntur, dicta.</a>
+            </div>
+            <button class="add-to-cart">Add to Cart</button>
+            <div class="quantity-controls" style="display: none;">
+              <button class="decrement"><i class="fas fa-minus"></i></button>
+              <span class="quantity">1</span>
+              <button class="increment">+</button>
+            </div>
+          </div>
+          <div class="product-card" data-id="2" data-price="30.00" data-image="main/assets/Products-imgs/gym-img2.png">
+            <div class="img-container">
+              <img src="main/assets/Products-imgs/gym-img2.png" alt="Product 2">
+              <div class="favorite-btn"><i class="fa-solid fa-heart"></i></div>
+            </div>
+            <div class="card-content">
+              <p class="card-content-price">$30.00</p>
+              <a href="main/shellDumble.html" class="card-content-info"><b class="card-content-name">Shell Dumble</b>, dolor sit amet consectetur
+                adipisicing elit. Consequuntur, dicta.</a>
+            </div>
+            <button class="add-to-cart">Add to Cart</button>
+            <div class="quantity-controls" style="display: none;">
+              <button class="decrement"><i class="fas fa-minus"></i></button>
+              <span class="quantity">1</span>
+              <button class="increment">+</button>
+            </div>
+          </div>
+          <div class="product-card" data-id="3" data-price="40.00" data-image="main/assets/Products-imgs/gym-img3.png">
+            <div class="img-container">
+              <img src="main/assets/Products-imgs/gym-img3.png" alt="Product 3">
+              <div class="favorite-btn"><i class="fa-solid fa-heart"></i></div> <!-- Favorite button -->
+            </div>
+            <div class="card-content">
+              <p class="card-content-price">$40.00</p>
+              <a href="main/bisepDumble.html" class="card-content-info"><b class="card-content-name">Bisep Dumble</b>, dolor sit amet consectetur
+                adipisicing elit. Consequuntur, dicta.</a>
+            </div>
+            <button class="add-to-cart">Add to Cart</button>
+            <div class="quantity-controls" style="display: none;">
+              <button class="decrement"><i class="fas fa-minus"></i></button>
+              <span class="quantity">1</span>
+              <button class="increment">+</button>
+            </div>
+          </div>
+          <div class="product-card" data-id="4" data-price="140.00" data-image="main/assets/Products-imgs/gym-img4.png">
+            <div class="img-container">
+              <img src="main/assets/Products-imgs/gym-img4.png" alt="Product 4">
+              <div class="favorite-btn"><i class="fa-solid fa-heart"></i></div> <!-- Favorite button -->
+            </div>
+            <div class="card-content">
+              <p class="card-content-price">$140.00</p>
+              <a href="main/twinDumble.html" class="card-content-info"><b class="card-content-name">Twin Dumble</b>, dolor sit amet consectetur
+                adipisicing elit. Consequuntur, dicta.</a>
+            </div>
+            <button class="add-to-cart">Add to Cart</button>
+            <div class="quantity-controls" style="display: none;">
+              <button class="decrement"><i class="fas fa-minus"></i></button>
+              <span class="quantity">1</span>
+              <button class="increment">+</button>
+            </div>
+          </div>
+          <div class="product-card" data-id="5" data-price="69.00" data-image="main/assets/Products-imgs/gym-img5.png">
+            <div class="img-container">
+              <img src="main/assets/Products-imgs/gym-img5.png" alt="Product 5">
+              <div class="favorite-btn"><i class="fa-solid fa-heart"></i></div> <!-- Favorite button -->
+            </div>
+            <div class="card-content">
+              <p class="card-content-price">$69.00</p>
+              <a href="main/momProtien.html" class="card-content-info"><b class="card-content-name">Mom's Protein</b>, dolor sit amet consectetur
+                adipisicing elit. Consequuntur, dicta.</a>
+            </div>
+            <button class="add-to-cart">Add to Cart</button>
+            <div class="quantity-controls" style="display: none;">
+              <button class="decrement"><i class="fas fa-minus"></i></button>
+              <span class="quantity">1</span>
+              <button class="increment">+</button>
+            </div>
+          </div>
+          <div class="product-card" data-id="6" data-price="34.00" data-image="main/assets/Products-imgs/gym-img6.png">
+            <div class="img-container">
+              <img src="main/assets/Products-imgs/gym-img6.png" alt="Product 6">
+              <div class="favorite-btn"><i class="fa-solid fa-heart"></i></div> <!-- Favorite button -->
+            </div>
+            <div class="card-content">
+              <p class="card-content-price">$34.00</p>
+              <a href="main/veginprotien.html" class="card-content-info"><b class="card-content-name">Vegin protein</b>, dolor sit amet consectetur
+                adipisicing elit. Consequuntur, dicta.</a>
+            </div>
+            <button class="add-to-cart">Add to Cart</button>
+            <div class="quantity-controls" style="display: none;">
+              <button class="decrement"><i class="fas fa-minus"></i></button>
+              <span class="quantity">1</span>
+              <button class="increment">+</button>
+            </div>
+          </div>
+          <div class="product-card" data-id="7" data-price="25.00" data-image="main/assets/Products-imgs/gym-img7.png">
+            <div class="img-container">
+              <img src="main/assets/Products-imgs/gym-img7.png" alt="Product 7">
+              <div class="favorite-btn"><i class="fa-solid fa-heart"></i></div> <!-- Favorite button -->
+            </div>
+            <div class="card-content">
+              <p class="card-content-price">$25.00</p>
+              <a href="main/wheyProtein.html" class="card-content-info"><b class="card-content-name">Whey protein</b>, dolor sit amet consectetur
+                adipisicing elit. Consequuntur, dicta.</a>
+            </div>
+            <button class="add-to-cart">Add to Cart</button>
+            <div class="quantity-controls" style="display: none;">
+              <button class="decrement"><i class="fas fa-minus"></i></button>
+              <span class="quantity">1</span>
+              <button class="increment">+</button>
+            </div>
+          </div>
+          <div class="product-card" data-id="8" data-price="100.00" data-image="main/assets/Products-imgs/gym-img8.png">
+            <div class="img-container">
+              <img src="main/assets/Products-imgs/gym-img8.png" alt="Product 8">
+              <div class="favorite-btn"><i class="fa-solid fa-heart"></i></div> <!-- Favorite button -->
+            </div>
+            <div class="card-content">
+              <p class="card-content-price">$100.00</p>
+              <a href="main/tribarProtien.html" class="card-content-info"><b class="card-content-name">Tribar Dumble</b>, dolor sit amet consectetur
+                adipisicing elit. Consequuntur, dicta.</a>
+            </div>
+            <button class="add-to-cart">Add to Cart</button>
+            <div class="quantity-controls" style="display: none;">
+              <button class="decrement"><i class="fas fa-minus"></i></button>
+              <span class="quantity">1</span>
+              <button class="increment">+</button>
+            </div>
+          </div>
+          <div class="product-card" data-id="9" data-price="46.00" data-image="main/assets/Products-imgs/gym-img9.png">
+            <div class="img-container">
+              <img src="main/assets/Products-imgs/gym-img9.png" alt="Product 9">
+              <div class="favorite-btn"><i class="fa-solid fa-heart"></i></div> <!-- Favorite button -->
+            </div>
+            <div class="card-content">
+              <p class="card-content-price">$46.00</p>
+              <a href="main/isolatedProtien.html" class="card-content-info"><b class="card-content-name">Isolated Protein</b>, dolor sit amet consectetur
+                adipisicing elit. Consequuntur, dicta.</a>
+            </div>
+            <button class="add-to-cart">Add to Cart</button>
+            <div class="quantity-controls" style="display: none;">
+              <button class="decrement"><i class="fas fa-minus"></i></button>
+              <span class="quantity">1</span>
+              <button class="increment">+</button>
+            </div>
+          </div>
+          <div class="product-card" data-id="10" data-price="199.00" data-image="main/assets/Products-imgs/gym-img10.png">
+            <div class="img-container">
+              <img src="main/assets/Products-imgs/gym-img10.png" alt="Product 10">
+              <div class="favorite-btn"><i class="fa-solid fa-heart"></i></div> <!-- Favorite button -->
+            </div>
+            <div class="card-content">
+              <p class="card-content-price">$199.00</p>
+              <a href="main/restCouch.html" class="card-content-info"><b class="card-content-name">Rest Couch</b>, dolor sit amet consectetur
+                adipisicing elit. Consequuntur, dicta.</a>
+            </div>
+            <button class="add-to-cart">Add to Cart</button>
+            <div class="quantity-controls" style="display: none;">
+              <button class="decrement"><i class="fas fa-minus"></i></button>
+              <span class="quantity">1</span>
+              <button class="increment">+</button>
+            </div>
+          </div>
+          <div class="product-card" data-id="11" data-price="500.00" data-image="main/assets/Products-imgs/gym-img11.png">
+            <div class="img-container">
+              <img src="main/assets/Products-imgs/gym-img11.png" alt="Product 11">
+              <div class="favorite-btn"><i class="fa-solid fa-heart"></i></div> <!-- Favorite button -->
+            </div>
+            <div class="card-content">
+              <p class="card-content-price">$500.00</p>
+              <a href="main/autoDeadlifter.html" class="card-content-info"><b class="card-content-name">Auto Deadlifter</b>, dolor sit amet consectetur
+                adipisicing elit. Consequuntur, dicta.</a>
+            </div>
+            <button class="add-to-cart">Add to Cart</button>
+            <div class="quantity-controls" style="display: none;">
+              <button class="decrement"><i class="fas fa-minus"></i></button>
+              <span class="quantity">1</span>
+              <button class="increment">+</button>
+            </div>
+          </div>
+          <div class="product-card" data-id="12" data-price="478.00" data-image="main/assets/Products-imgs/gym-img12.png">
+            <div class="img-container">
+              <img src="main/assets/Products-imgs/gym-img12.png" alt="Product 12">
+              <div class="favorite-btn"><i class="fa-solid fa-heart"></i></div> <!-- Favorite button -->
+            </div>
+            <div class="card-content">
+              <p class="card-content-price">$478.00</p>
+              <a href="main/futureMachine.html" class="card-content-info"><b class="card-content-name">Future Machine</b>, dolor sit amet consectetur
+                adipisicing elit. Consequuntur, dicta.</a>
+            </div>
+            <button class="add-to-cart">Add to Cart</button>
+            <div class="quantity-controls" style="display: none;">
+              <button class="decrement"><i class="fas fa-minus"></i></button>
+              <span class="quantity">1</span>
+              <button class="increment">+</button>
+            </div>
+          </div>
+          <div class="product-card" data-id="13" data-price="600.00" data-image="main/assets/Products-imgs/gym-img13.png">
+            <div class="img-container">
+              <img src="main/assets/Products-imgs/gym-img13.png" alt="Product 13">
+              <div class="favorite-btn"><i class="fa-solid fa-heart"></i></div> <!-- Favorite button -->
+            </div>
+            <div class="card-content">
+              <p class="card-content-price">$600.00</p>
+              <a href="main/autoSquiter.html" class="card-content-info"><b class="card-content-name">Auto Squiter</b>, dolor sit amet consectetur
+                adipisicing elit. Consequuntur, dicta.</a>
+            </div>
+            <button class="add-to-cart">Add to Cart</button>
+            <div class="quantity-controls" style="display: none;">
+              <button class="decrement"><i class="fas fa-minus"></i></button>
+              <span class="quantity">1</span>
+              <button class="increment">+</button>
+            </div>
+          </div>
+          <div class="product-card" data-id="14" data-price="20.00" data-image="main/assets/Products-imgs/gym-img14.png">
+            <div class="img-container">
+              <img src="main/assets/Products-imgs/gym-img14.png" alt="Product 14">
+              <div class="favorite-btn"><i class="fa-solid fa-heart"></i></div> <!-- Favorite button -->
+            </div>
+            <div class="card-content">
+              <p class="card-content-price">$20.00</p>
+              <a href="main/armCurler.html" class="card-content-info"><b class="card-content-name">Arm Curler</b>, dolor sit amet consectetur
+                adipisicing elit. Consequuntur, dicta.</a>
+            </div>
+            <button class="add-to-cart">Add to Cart</button>
+            <div class="quantity-controls" style="display: none;">
+              <button class="decrement"><i class="fas fa-minus"></i></button>
+              <span class="quantity">1</span>
+              <button class="increment">+</button>
+            </div>
+          </div>
+
+          <div class="product-card" data-id="15" data-price="9.00" data-image="main/assets/Products-imgs/gym-img15.png">
+            <div class="img-container">
+              <img src="main/assets/Products-imgs/gym-img15.png" alt="Product 15">
+              <div class="favorite-btn"><i class="fa-solid fa-heart"></i></div> <!-- Favorite button -->
+            </div>
+            <div class="card-content">
+              <p class="card-content-price">$9.00</p>
+              <a href="main/handCurler.html" class="card-content-info"><b class="card-content-name">Hand curler</b>, dolor sit amet consectetur
+                adipisicing elit. Consequuntur, dicta.</a>
+            </div>
+            <button class="add-to-cart">Add to Cart</button>
+            <div class="quantity-controls" style="display: none;">
+              <button class="decrement"><i class="fas fa-minus"></i></button>
+              <span class="quantity">1</span>
+              <button class="increment">+</button>
+            </div>
+          </div>
+
+          <!-- Additional product cards go here -->
+        </div>
+        <div class="nav-button">
+          <button id="prevButton2" onclick="prevProductSlide()"><i class="fas fa-chevron-left"></i></button>
+          <button id="nextButton2" onclick="nextProductSlide()"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <div class="animation-container">
+      <div class="animation-wrapper">
+        <div class="animation-card">
+          <img src="main/assets/Products-imgs/perfume-imginfo1.png" alt="" class="product_img">
+          <div class="product_info">
+            <h3>Product Title 1</h3>
+            <p>Product description goes here. It can include details about the product, features, and benefits.</p>
+            <p><strong>Price:</strong> $100</p>
+          </div>
+        </div>
+        <div class="animation-card">
+          <img src="main/assets/Products-imgs/perfume-imginfo2.png" alt="" class="product_img">
+          <div class="product_info">
+            <h3>Product Title 1</h3>
+            <p>Product description goes here. It can include details about the product, features, and benefits.</p>
+            <p><strong>Price:</strong> $100</p>
+          </div>
+        </div>
+        <div class="animation-card">
+          <img src="main/assets/Products-imgs/perfume-imginfo3.png" alt="" class="product_img">
+          <div class="product_info">
+            <h3>Product Title 1</h3>
+            <p>Product description goes here. It can include details about the product, features, and benefits.</p>
+            <p><strong>Price:</strong> $100</p>
+          </div>
+        </div>
+        <div class="animation-card">
+          <img src="main/assets/Products-imgs/perfume-imginfo4.png" alt="" class="product_img">
+          <div class="product_info">
+            <h3>Product Title 2</h3>
+            <p>Product description goes here. It can include details about the product, features, and benefits.</p>
+            <p><strong>Price:</strong> $150</p>
+          </div>
+        </div>
+        <div class="animation-card">
+          <img src="main/assets/Products-imgs/perfume-imginfo5.png" alt="" class="product_img">
+          <div class="product_info">
+            <h3>Product Title 3</h3>
+            <p>Product description goes here. It can include details about the product, features, and benefits.</p>
+            <p><strong>Price:</strong> $120</p>
+          </div>
+        </div>
+        <!-- Add more cards as needed -->
+      </div>
+    </div>
+    
+
+
+
+
+    <!--under cunstraction
+  <div class="unique-slider-container">
+    <div class="unique-sub-slider">
+      <div class="unique-slide">
+        <div class="unique-img-container">
+          <img class="unique-slider-product-img" src="main/assets/Products-imgs/potrate2.jfif" alt="Product Image 1">
+        </div>
+        <div class="unique-img-container">
+          <img class="unique-slider-product-img" src="main/assets/Products-imgs/potrate4.jfif" alt="Product Image 2">
+        </div>
+        <div class="unique-img-container">
+          <img class="unique-slider-product-img" src="main/assets/Products-imgs/potrate6.jfif" alt="Product Image 3">
+        </div>
+        <div class="unique-img-container">
+          <img class="unique-slider-product-img" src="main/assets/Products-imgs/potrate1.jfif" alt="Product Image 4">
+        </div>
+        <div class="unique-img-container">
+          <img class="unique-slider-product-img" src="main/assets/Products-imgs/potrate3.jfif" alt="Product Image 5">
+        </div>
+        <div class="unique-img-container">
+          <img class="unique-slider-product-img" src="main/assets/Products-imgs/potrate5.jfif" alt="Product Image 6">
+        </div>
+      </div>
+    </div>
+    <button id="unique-prev-btn" class="unique-slider-button">&lt;</button>
+    <button id="unique-next-btn" class="unique-slider-button">&gt;</button>
+  </div>
+  -->
+
+    
+
+
+
+
+
+
+<div class="animation-cards">
+  <div class="animation-cards-heading">
+    Heading
+  </div>
+  <div class="container">
+    <div class="card">
+        <div class="imgBx">
+            <img src="main/assets/Products-imgs/ani-item1.jpg" alt="" />
+            <ul class="action">
+                <li>
+                    <i class="fa fa-heart" aria-hidden="true"></i>
+                    <span>Add to wishlist</span>
+                </li>
+
+                <li>
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i
+          ><span>Add to cart</span>
+        </li>
+
+        <li>
+          <i class="fa fa-eye" aria-hidden="true"></i
+          ><span>View Details</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <div class="productName">Wintage Tv</div>
+
+      <div class="price-rating">
+        <h2>$1999.99</h2>
+        <div class="rating">
+          <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa grey fa-star" aria-hidden="true"></i>
+        </div>
+    </div>
+</div>
+</div>
+<div class="card">
+    <div class="imgBx">
+        <img src="main/assets/Products-imgs/ani-item2.jpg" alt="" />
+        <ul class="action">
+            <li>
+                <i class="fa fa-heart" aria-hidden="true"></i>
+                <span>Add to wishlist</span>
+            </li>
+
+            <li>
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i
+          ><span>Add to cart</span>
+        </li>
+
+        <li>
+          <i class="fa fa-eye" aria-hidden="true"></i
+          ><span>View Details</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <div class="productName">Decoration Cactus</div>
+
+      <div class="price-rating">
+        <h2>$22.99</h2>
+        <div class="rating">
+          <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star grey" aria-hidden="true"></i>
+                <i class="fa fa-star grey" aria-hidden="true"></i>
+    </div>
+</div>
+</div>
+</div>
+<div class="card">
+    <div class="imgBx">
+        <img src="main/assets/Products-imgs/ani-item3.jpg" alt="" />
+        <ul class="action">
+            <li>
+                <i class="fa fa-heart" aria-hidden="true"></i>
+                <span>Add to wishlist</span>
+            </li>
+
+            <li>
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i
+          ><span>Add to cart</span>
+        </li>
+
+        <li>
+          <i class="fa fa-eye" aria-hidden="true"></i
+          ><span>View Details</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <div class="productName">Rikey Shoes</div>
+
+      <div class="price-rating">
+        <h2>$99.45</h2>
+        <div class="rating">
+          <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star grey" aria-hidden="true"></i>
+                <i class="fa fa-star grey" aria-hidden="true"></i>
+                <i class="fa fa-star grey" aria-hidden="true"></i>
+    </div>
+</div>
+</div>
+</div>
+<div class="card">
+    <div class="imgBx">
+        <img src="main/assets/Products-imgs/ani-item4.jpg" alt="" />
+        <ul class="action">
+            <li>
+                <i class="fa fa-heart" aria-hidden="true"></i>
+                <span>Add to wishlist</span>
+            </li>
+
+            <li>
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i
+          ><span>Add to cart</span>
+        </li>
+
+        <li>
+          <i class="fa fa-eye" aria-hidden="true"></i
+          ><span>View Details</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <div class="productName">Nike Av8</div>
+
+      <div class="price-rating">
+        <h2>$200.00</h2>
+        <div class="rating">
+          <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+    </div>
+</div>
+</div>
+</div>
+<div class="card">
+    <div class="imgBx">
+        <img src="main/assets/Products-imgs/ani-item5.jpg" alt="" />
+        <ul class="action">
+            <li>
+                <i class="fa fa-heart" aria-hidden="true"></i>
+                <span>Add to wishlist</span>
+            </li>
+
+            <li>
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i
+          ><span>Add to cart</span>
+        </li>
+
+        <li>
+          <i class="fa fa-eye" aria-hidden="true"></i
+          ><span>View Details</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <div class="productName">Leather Jecket</div>
+
+      <div class="price-rating">
+        <h2>$50.00</h2>
+        <div class="rating">
+          <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+    </div>
+</div>
+</div>
+</div>
+<div class="card">
+    <div class="imgBx">
+        <img src="main/assets/Products-imgs/ani-item6.jpg" alt="" />
+        <ul class="action">
+            <li>
+                <i class="fa fa-heart" aria-hidden="true"></i>
+                <span>Add to wishlist</span>
+            </li>
+
+            <li>
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i
+          ><span>Add to cart</span>
+        </li>
+
+        <li>
+          <i class="fa fa-eye" aria-hidden="true"></i
+          ><span>View Details</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <div class="productName">Evas Chair</div>
+
+      <div class="price-rating">
+        <h2>$43.45</h2>
+        <div class="rating">
+          <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+    </div>
+</div>
+</div>
+</div>
+<div class="card">
+    <div class="imgBx">
+        <img src="main/assets/Products-imgs/ani-item7.jpg" alt="" />
+        <ul class="action">
+            <li>
+                <i class="fa fa-heart" aria-hidden="true"></i>
+                <span>Add to wishlist</span>
+            </li>
+
+            <li>
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i
+          ><span>Add to cart</span>
+        </li>
+
+        <li>
+          <i class="fa fa-eye" aria-hidden="true"></i
+          ><span>View Details</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <div class="productName">Ruff top</div>
+
+      <div class="price-rating">
+        <h2>$13.45</h2>
+        <div class="rating">
+          <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+    </div>
+</div>
+</div>
+</div>
+<div class="card">
+    <div class="imgBx">
+        <img src="main/assets/Products-imgs/ani-item8.jpg" alt="" />
+        <ul class="action">
+            <li>
+                <i class="fa fa-heart" aria-hidden="true"></i>
+                <span>Add to wishlist</span>
+            </li>
+
+            <li>
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i
+          ><span>Add to cart</span>
+        </li>
+
+        <li>
+          <i class="fa fa-eye" aria-hidden="true"></i
+          ><span>View Details</span>
+        </li>
+      </ul>
+    </div>
+    <div class="content">
+      <div class="productName">Nike Strite Orange</div>
+
+      <div class="price-rating">
+        <h2>$453.99</h2>
+        <div class="rating">
+          <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+    </div>
+</div>
+</div>
+</div>
+
+
+<!--Hidden cards-->
+
+<div class="card hidden">
+  <div class="imgBx">
+      <img src="main/assets/Products-imgs/ani-item9.jpg" alt="" />
+      <ul class="action">
+          <li>
+              <i class="fa fa-heart" aria-hidden="true"></i>
+              <span>Add to wishlist</span>
+          </li>
+
+          <li>
+              <i class="fa fa-shopping-cart" aria-hidden="true"></i
+        ><span>Add to cart</span>
+      </li>
+
+      <li>
+        <i class="fa fa-eye" aria-hidden="true"></i
+        ><span>View Details</span>
+      </li>
+    </ul>
+  </div>
+  <div class="content">
+    <div class="productName">Prada Milino</div>
+
+    <div class="price-rating">
+      <h2>$245.00</h2>
+      <div class="rating">
+        <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+  </div>
+</div>
+</div>
+</div>
+<div class="card hidden">
+  <div class="imgBx">
+      <img src="main/assets/Products-imgs/ani-item10.jpg" alt="" />
+      <ul class="action">
+          <li>
+              <i class="fa fa-heart" aria-hidden="true"></i>
+              <span>Add to wishlist</span>
+          </li>
+
+          <li>
+              <i class="fa fa-shopping-cart" aria-hiddn="true"></i
+        ><span>Add to cart</span>
+      </li>
+
+      <li>
+        <i class="fa fa-eye" aria-hidden="true"></i
+        ><span>View Details</span>
+      </li>
+    </ul>
+  </div>
+  <div class="content">
+    <div class="productName">Fossil Jhonwick</div>
+
+    <div class="price-rating">
+      <h2>$999.99</h2>
+      <div class="rating">
+        <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+  </div>
+</div>
+</div>
+</div>
+<div class="card hidden">
+  <div class="imgBx">
+      <img src="main/assets/Products-imgs/ani-item11.jpg" alt="" />
+      <ul class="action">
+          <li>
+              <i class="fa fa-heart" aria-hidden="true"></i>
+              <span>Add to wishlist</span>
+          </li>
+
+          <li>
+              <i class="fa fa-shopping-cart" aria-hidden="true"></i
+        ><span>Add to cart</span>
+      </li>
+
+      <li>
+        <i class="fa fa-eye" aria-hidden="true"></i
+        ><span>View Details</span>
+      </li>
+    </ul>
+  </div>
+  <div class="content">
+    <div class="productName">Stright Sunglasses</div>
+
+    <div class="price-rating">
+      <h2>$10.87</h2>
+      <div class="rating">
+        <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+  </div>
+</div>
+</div>
+</div>
+<div class="card hidden">
+  <div class="imgBx">
+      <img src="main/assets/Products-imgs/ani-item16.jpg" alt="" />
+      <ul class="action">
+          <li>
+              <i class="fa fa-heart" aria-hidden="true"></i>
+              <span>Add to wishlist</span>
+          </li>
+
+          <li>
+              <i class="fa fa-shopping-cart" aria-hidden="true"></i
+        ><span>Add to cart</span>
+      </li>
+
+      <li>
+        <i class="fa fa-eye" aria-hidden="true"></i
+        ><span>View Details</span>
+      </li>
+    </ul>
+  </div>
+  <div class="content">
+    <div class="productName">Hoodie Tricolor</div>
+
+    <div class="price-rating">
+      <h2>$34.43</h2>
+      <div class="rating">
+        <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+  </div>
+</div>
+</div>
+</div>
+<div class="card hidden">
+  <div class="imgBx">
+      <img src="main/assets/Products-imgs/ani-item12.jpg" alt="" />
+      <ul class="action">
+          <li>
+              <i class="fa fa-heart" aria-hidden="true"></i>
+              <span>Add to wishlist</span>
+          </li>
+
+          <li>
+              <i class="fa fa-shopping-cart" aria-hidden="true"></i
+        ><span>Add to cart</span>
+      </li>
+
+      <li>
+        <i class="fa fa-eye" aria-hidden="true"></i
+        ><span>View Details</span>
+      </li>
+    </ul>
+  </div>
+  <div class="content">
+    <div class="productName">Summer Heels</div>
+
+    <div class="price-rating">
+      <h2>$66.66</h2>
+      <div class="rating">
+        <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+  </div>
+</div>
+</div>
+</div>
+<div class="card hidden">
+  <div class="imgBx">
+      <img src="main/assets/Products-imgs/ani-item13.jpg" alt="" />
+      <ul class="action">
+          <li>
+              <i class="fa fa-heart" aria-hidden="true"></i>
+              <span>Add to wishlist</span>
+          </li>
+
+          <li>
+              <i class="fa fa-shopping-cart" aria-hidden="true"></i
+        ><span>Add to cart</span>
+      </li>
+
+      <li>
+        <i class="fa fa-eye" aria-hidden="true"></i
+        ><span>View Details</span>
+      </li>
+    </ul>
+  </div>
+  <div class="content">
+    <div class="productName">Class Glasses</div>
+
+    <div class="price-rating">
+      <h2>$40.00</h2>
+      <div class="rating">
+        <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+  </div>
+</div>
+</div>
+</div>
+<div class="card hidden">
+  <div class="imgBx">
+      <img src="main/assets/Products-imgs/ani-item14.jpg" alt="" />
+      <ul class="action">
+          <li>
+              <i class="fa fa-heart" aria-hidden="true"></i>
+              <span>Add to wishlist</span>
+          </li>
+
+          <li>
+              <i class="fa fa-shopping-cart" aria-hidden="true"></i
+        ><span>Add to cart</span>
+      </li>
+
+      <li>
+        <i class="fa fa-eye" aria-hidden="true"></i
+        ><span>View Details</span>
+      </li>
+    </ul>
+  </div>
+  <div class="content">
+    <div class="productName">Supino Pro Watch</div>
+
+    <div class="price-rating">
+      <h2>$499.00</h2>
+      <div class="rating">
+        <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+  </div>
+</div>
+</div>
+</div>
+<div class="card hidden">
+  <div class="imgBx">
+      <img src="main/assets/Products-imgs/ani-item15.jpg" alt="" />
+      <ul class="action">
+          <li>
+              <i class="fa fa-heart" aria-hidden="true"></i>
+              <span>Add to wishlist</span>
+          </li>
+
+          <li>
+              <i class="fa fa-shopping-cart" aria-hidden="true"></i
+        ><span>Add to cart</span>
+      </li>
+
+      <li>
+        <i class="fa fa-eye" aria-hidden="true"></i
+        ><span>View Details</span>
+      </li>
+    </ul>
+  </div>
+  <div class="content">
+    <div class="productName">Rolex 2006</div>
+
+    <div class="price-rating">
+      <h2>$3000.00</h2>
+      <div class="rating">
+        <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+  </div>
+</div>
+</div>
+</div>
+
+
+
+
+</div>
+<div class="load-buttons">
+<button id="loadMore" class="load-more">Load More</button>
+<button id="loadLess" class="load-less hidden">Load Less</button>
+</div>
+<div class="pagination ">
+    <button id="prevPage" class="pagination-btn">Previous</button>
+    <span id="pageNumber">Page 1 of 100</span>
+    <button id="nextPage" class="pagination-btn">Next</button>
+</div>
+</div>
+    
+    
+
+   
+    
+
+
+
+
+
+
+
+
+
+
+     <div class="scroll-animation">
+      <div class="wrapper-animation">
+        <div class="itemLeft item1"><a><img src="main/assets/img-support1.png"></a></div>
+        <div class="itemLeft item2"><a><img src="main/assets/img-support2.png"></a></div>
+        <div class="itemLeft item3"><a><img src="main/assets/img-support3.png"></a></div>
+        <div class="itemLeft item4"><a><img src="main/assets/img-support4.png"></a></div>
+        <div class="itemLeft item5"><a><img src="main/assets/img-support5.png"></a></div>
+        <div class="itemLeft item6"><a><img src="main/assets/img-support6.png"></a></div>
+        <div class="itemLeft item7"><a><img src="main/assets/img-support7.png"></a></div>
+        <div class="itemLeft item8"><a><img src="main/assets/img-support8.png"></a></div>
+      </div>
+      </div>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+  </main>
+
+  <!-- Main Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-row">
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Press Releases</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Customer Service</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="#">Shipping</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Follow Us</h4>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><i class="fas fa-map-marker-alt"></i> 123 Main St, City, Country</li>
+            <li><i class="fas fa-phone-alt"></i> +123 456 7890</li>
+            <li><i class="fas fa-envelope"></i> info@yourcompany.com</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Sub Footer -->
+  <div class="sub-footer">
+    <div class="sub-footer-container">
+      <p>&copy; 2024 YourCompany. All Rights Reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of
+          Service</a></p>
+    </div>
+  </div>
+
+
+  <script src="main/Js/script.js"></script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    
+    AOS.init({
+      duration: 1200, 
+    });
+
+  </script>
+</body>
+
+</html>

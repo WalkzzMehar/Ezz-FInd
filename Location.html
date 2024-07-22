@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="main/Css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href='https://fonts.googleapis.com/css?family=Source Sans Pro' rel='stylesheet'>
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <title>Online Shopping Navbar</title>
+</head>
+
+<body>
+
+  <div class="navbar">
+    <a href="index.html" class="logo">Logo</a>
+    <div class="location-btn">
+      <div class="location-nav"><i class="fa-solid fa-location-dot"></i>
+        <div id="location-pop">Set Your <br>Location</div>
+      </div>
+    </div>
+
+
+
+    <div id="overlay"></div>
+    <div id="loc-popup" class="loc-popup">
+      <div class="pop-header">
+        <h2>Choose your location</h2>
+        <button class="closePopupButton"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="pop-main">
+        <div>
+          <p>Delivery options and delivery speeds may vary for different locations</p>
+        </div>
+        <div>
+          <form onsubmit="return getCity()" class="zip-code">
+            <label for="zip">Zip Code:</label>
+            <div class="zip-zip">
+              <input type="text" id="zip" name="zip" required>
+              <button type="submit" class="zip-sub-btn">Submit</button>
+            </div>
+          </form>
+          <p id="result"></p>
+        </div>
+        <div class="dropdown-shiping-container">
+          <label>Ship outside:</label>
+          <input type="text" placeholder="Select a country..." id="countryInput" readonly onclick="toggleDropdown()">
+          <div id="shiping-dropdown" class="shiping-dropdown">
+            <a href="#" onclick="selectCountry('United States')">United States</a>
+            <a href="#" onclick="selectCountry('Canada')">Canada</a>
+            <a href="#" onclick="selectCountry('United Kingdom')">United Kingdom</a>
+            <a href="#" onclick="selectCountry('Australia')">Australia</a>
+            <a href="#" onclick="selectCountry('Germany')">Germany</a>
+          </div>
+        </div>
+      </div>
+      <div class="pop-footer">
+        <a href="Location.html" class="main-pop-btn">
+          <button class="google-pop-btn"><img src="main/assets/google-icon.png" height="20px" width="20px">Search on Google
+            Maps</button>
+          <button class="professional-btn">Done</button>
+        </a>
+      </div>
+    </div>
+
+    <div id="success-popup" class="success-popup">
+      <h2>Success</h2>
+      <p>Your location has been set successfully!</p>
+    </div>
+
+
+
+
+    <!--searchbar-starts-->
+    <div class="search-container">
+      <form action="/search" method="get" class="search-form">
+        <div class="search-dropdown">
+          <select name="searchType" class="search-select" id="search-select" onchange="updatePlaceholder()">
+            <option value="all">All</option>
+            <option value="products">Products</option>
+            <option value="categories">Categories</option>
+            <option value="brands">Brands</option>
+          </select>
+        </div>
+        <input type="text" name="query" class="search-input" id="search-input" placeholder="Search Anything...">
+        <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+      </form>
+    </div>
+    <!--searchbar-end-->
+    <a href="#">
+      <div class="ReturnOrOrder-nav">Return <br> <B class="io">& Order</B></div>
+    </a>
+    <a href="login.html">
+      <div class="account-nav"><i class="fa-solid fa-user"></i>Account</div>
+    </a>
+    <a href="#">
+      <div class="cart-nav">
+        <div class="cart">
+          <button id="cartButton">
+            <i class="fas fa-shopping-cart"></i> $<span id="cartTotal">0.00</span>
+          </button>
+          <div id="cartDropdown" class="cart-dropdown">
+            <ul id="cartItems"></ul>
+            <div class="cart-total">
+              Total: $<span id="cartTotalDropdown">0.00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <div class="sub-navbar">
+    <div class="sub-dropdown">
+      <a href="#" class="sub-dropdown-link" onclick="toggleDropdown(event)">All <i class="fas fa-chevron-down"></i></a>
+      <div class="dropdown-content">
+        <a href="#">Service 1</a>
+        <a href="#">Service 2</a>
+        <a href="#">Service 3</a>
+        <a href="#">Service 4</a>
+        <a href="#">Service 5</a>
+        <a href="#">Service 6</a>
+        <a href="#">Service 7</a>
+        <a href="#">Service 8</a>
+        <a href="#">Service 9</a>
+        <a href="#">Service 10</a>
+      </div>
+    </div>
+    <a href="#">Hot Deals</a>
+    <a href="login.html">Sell</a>
+    <a href="myStore.html">Create Store</a>
+    <a href="customer-services.html">Customer Services</a>
+  </div>
+
+
+<div class="location-container">
+<h1>Location</h1>
+<iframe class="google-map" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d672.1548537453876!2d13.042095642539413!3d47.633528859936284!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4776eb68323a0885%3A0xa3c683360a4528a8!2sBerghof!5e0!3m2!1sen!2s!4v1718233393755!5m2!1sen!2s" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
+
+
+
+
+
+
+<script>
+  
+// location pop up
+const showPopupButtons = document.querySelectorAll('#location-pop, #loc-done'); 
+const closePopupButton = document.querySelector('.closePopupButton');
+const popup = document.getElementById('loc-popup');
+const overlay = document.getElementById('overlay');
+
+// Add event listeners to both buttons
+showPopupButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    popup.style.display = 'block';
+    overlay.style.display = 'block';
+  });
+});
+
+closePopupButton.addEventListener('click', () => {
+  popup.style.display = 'none';
+  overlay.style.display = 'none';
+});
+
+overlay.addEventListener('click', (event) => {
+  if (!popup.contains(event.target)) {
+    popup.style.display = 'none';
+    overlay.style.display = 'none';
+  }
+});
+
+popup.addEventListener('click', (event) => {
+  event.stopPropagation();
+});
+
+
+// Handle zip code form submission
+document.querySelector('.closePopupButton').addEventListener('click', function () {
+  document.getElementById('overlay').style.display = 'none';
+  document.getElementById('loc-popup').style.display = 'none';
+});
+
+function getCity() {
+  const zipCode = document.getElementById('zip').value;
+  const zipToCity = {
+    '10001': 'New York',
+    '94103': 'San Francisco',
+    '60601': 'Chicago',
+    '90001': 'Los Angeles',
+    '73301': 'Austin'
+  };
+
+  const city = zipToCity[zipCode];
+  const resultElement = document.getElementById('result');
+
+  if (city) {
+    document.getElementById('location-pop').innerHTML = `Deliver to: <br>${city}`;
+    showSuccessPopup();
+  } else {
+    resultElement.textContent = `No city found for zip code ${zipCode}.`;
+  }
+
+  return false; // Prevent form submission
+}
+
+function showSuccessPopup() {
+  document.getElementById('loc-popup').style.display = 'none';
+  document.getElementById('success-popup').style.display = 'block';
+
+  setTimeout(function () {
+    document.getElementById('success-popup').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
+  }, 2000);
+}
+
+// Handle shipping country selector
+function toggleDropdown() {
+  document.getElementById("shiping-dropdown").classList.toggle("show");
+}
+
+function selectCountry(country) {
+  document.getElementById("countryInput").value = country;
+  document.getElementById("shiping-dropdown").classList.remove("show");
+}
+
+window.onclick = function(event) {
+  if (!event.target.matches('#countryInput') && !event.target.closest('.shiping-dropdown')) {
+    var dropdowns = document.getElementsByClassName("shiping-dropdown");
+    for (var i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+
+document.getElementById("countryInput").addEventListener('input', function(event) {
+  const dropdown = document.getElementById("shiping-dropdown");
+  const filter = event.target.value.toUpperCase();
+  const links = dropdown.getElementsByTagName('a');
+
+  let anyVisible = false;
+  for (let i = 0; i < links.length; i++) {
+    const txtValue = links[i].textContent || links[i].innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      links[i].style.display = "";
+      anyVisible = true;
+    } else {
+      links[i].style.display = "none";
+    }
+  }
+  dropdown.style.display = anyVisible ? "block" : "none";
+});
+
+</script>
+
+    <script src="main/Js/script.js"></script>
+    <script src="Js/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

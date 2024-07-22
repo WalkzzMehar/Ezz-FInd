@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phone Sale Event</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+      body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+header {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 2em 0;
+    text-align: center;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1em;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin: 0;
+}
+
+header p {
+    font-size: 1.2em;
+    margin: 0.5em 0 0;
+}
+
+main {
+    max-width: 1200px;
+    margin: 2em auto;
+    padding: 0 1em;
+}
+
+.phone-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.phone-item {
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 1.5em;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: auto; /* Default height */
+}
+
+.phone-item img {
+    max-width: 200px;
+    margin: 0 auto; /* Center image horizontally */
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    display: block;
+}
+
+.phone-details {
+    flex: 1;
+    margin-left: 2.5em; /* Increased space around the image */
+}
+
+.phone-details h2 {
+    font-size: 1.8em;
+    margin: 0;
+    color: #007BFF;
+}
+
+.phone-details .price {
+    color: #28a745;
+    font-size: 1.5em;
+    margin: 0.5em 0;
+}
+
+.phone-details .description {
+    margin: 0.5em 0;
+    color: #666;
+    line-height: 1.6;
+}
+
+.phone-details .specs {
+    list-style: none;
+    padding: 0;
+    margin: 1em 0;
+    color: #333;
+}
+
+.phone-details .specs li {
+    margin: 0.5em 0;
+}
+
+.buy-now {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 0.8em 1.5em;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+
+.buy-now:hover {
+    background-color: #0056b3;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1em 0;
+    margin-top: 2em;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1em;
+}
+
+@media (max-width: 768px) {
+    .phone-item {
+        flex-direction: column;
+        align-items: center;
+        height: 200px; /* Increase height by 200px */
+    }
+
+    .phone-item img {
+        margin: 0 auto 1em; /* Center image and add margin at the bottom */
+    }
+
+    .phone-details {
+        margin-left: 0;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1>Exclusive Phone Sale Event</h1>
+            <p>Get the best deals on the latest smartphones!</p>
+        </div>
+    </header>
+    <main>
+        <section class="phone-list">
+            <div class="phone-item">
+                <img src="path/to/phone-image1.jpg" alt="Phone 1">
+                <div class="phone-details">
+                    <h2>Phone Name 1</h2>
+                    <p class="price">$299.99</p>
+                    <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent viverra, justo ut tempus aliquam, neque eros facilisis purus, a faucibus elit erat sed leo. Nulla facilisi.</p>
+                    <ul class="specs">
+                        <li><strong>Display:</strong> 6.1-inch OLED</li>
+                        <li><strong>Processor:</strong> A13 Bionic</li>
+                        <li><strong>Camera:</strong> Dual 12MP</li>
+                        <li><strong>Battery:</strong> 3110mAh</li>
+                    </ul>
+                    <button class="buy-now">Buy Now</button>
+                </div>
+            </div>
+            <div class="phone-item">
+                <img src="path/to/phone-image2.jpg" alt="Phone 2">
+                <div class="phone-details">
+                    <h2>Phone Name 2</h2>
+                    <p class="price">$399.99</p>
+                    <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent viverra, justo ut tempus aliquam, neque eros facilisis purus, a faucibus elit erat sed leo. Nulla facilisi.</p>
+                    <ul class="specs">
+                        <li><strong>Display:</strong> 6.5-inch OLED</li>
+                        <li><strong>Processor:</strong> A14 Bionic</li>
+                        <li><strong>Camera:</strong> Triple 12MP</li>
+                        <li><strong>Battery:</strong> 3500mAh</li>
+                    </ul>
+                    <button class="buy-now">Buy Now</button>
+                </div>
+            </div>
+            <!-- Add more phone items as needed -->
+        </section>
+    </main>
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2024 Your Company. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

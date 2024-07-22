@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="Css/style.css">
+  <link href='https://fonts.googleapis.com/css?family=Source Sans Pro' rel='stylesheet'>
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <title>Smart Phones</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        main {
+            max-width: 90%;
+            margin-inline: 5%;
+            margin: 2em auto;
+            padding: 0 1em;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .sort-container {
+            margin-bottom: 2em;
+            text-align: center;
+            width: auto;
+            background-color: #fff;
+            padding: 1em;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sort-container label {
+            font-size: 1.2em;
+            margin-right: 1em;
+            font-weight: 500;
+        }
+
+        .sort-container select {
+            padding: 0.5em 1em;
+            font-size: 1em;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: border-color 0.3s;
+        }
+
+        .sort-container select:focus {
+            border-color: #007BFF;
+            outline: none;
+        }
+
+        .phone-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2em;
+        }
+
+        .phone-item {
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            padding: 1.5em;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            height: auto;
+        }
+
+        .phone-item img {
+            max-width: 300px;
+            margin: 0 auto;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            display: block;
+            height: 250px;
+        }
+
+        .phone-details {
+            flex: 1;
+            margin-left: 2.5em;
+        }
+
+        .phone-details h2 {
+            font-size: 1.8em;
+            margin: 0;
+            color: #222;
+        }
+
+        .phone-details .price {
+            color: #28a745;
+            font-size: 1.5em;
+            margin: 0.5em 0;
+        }
+
+        .phone-details .description {
+            margin: 0.5em 0;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .phone-details .specs {
+            list-style: none;
+            padding: 0;
+            margin: 1em 0;
+            color: #333;
+        }
+
+        .phone-details .specs li {
+            margin: 0.5em 0;
+        }
+
+        .buy-now {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 0.8em 1.5em;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+
+        .buy-now:hover {
+            background-color: #444;
+        }
+
+        .load-buttons {
+            text-align: center;
+            margin-top: 2em;
+        }
+        .gbzio{
+          font-size: 25px;
+          font-weight: bold;
+        }
+
+        .load-buttons button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 0.8em 1.5em;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin: 0 1em;
+            transition: background-color 0.3s;
+        }
+
+        .load-buttons button:hover {
+            background-color: #444;
+        }
+
+        
+
+        @media (max-width: 768px) {
+            .phone-item {
+                flex-direction: column;
+                align-items: center;
+                height: 400px;
+            }
+
+            .phone-item img {
+                margin: 0 auto 1em;
+            }
+
+            .phone-details {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+  <div class="navbar">
+    <a href="../index.html" class="logo">Logo</a>
+    <div class="location-btn">
+      <div class="location-nav"><i class="fa-solid fa-location-dot"></i>
+        <div id="location-pop">Set Your <br>Location</div>
+      </div>
+    </div>
+
+
+
+    <div id="overlay"></div>
+    <div id="loc-popup" class="loc-popup">
+      <div class="pop-header">
+        <h2>Choose your location</h2>
+        <button class="closePopupButton"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="pop-main">
+        <div>
+          <p>Delivery options and delivery speeds may vary for different locations</p>
+        </div>
+        <div>
+          <form onsubmit="return getCity()" class="zip-code">
+            <label for="zip">Zip Code:</label>
+            <div class="zip-zip">
+              <input type="text" id="zip" name="zip" required>
+              <button type="submit" class="zip-sub-btn">Submit</button>
+            </div>
+          </form>
+          <p id="result"></p>
+        </div>
+        <div class="dropdown-shiping-container">
+          <label>Ship outside:</label>
+          <input type="text" placeholder="Select a country..." id="countryInput" readonly onclick="toggleDropdown()">
+          <div id="shiping-dropdown" class="shiping-dropdown">
+            <a href="#" onclick="selectCountry('United States')">United States</a>
+            <a href="#" onclick="selectCountry('Canada')">Canada</a>
+            <a href="#" onclick="selectCountry('United Kingdom')">United Kingdom</a>
+            <a href="#" onclick="selectCountry('Australia')">Australia</a>
+            <a href="#" onclick="selectCountry('Germany')">Germany</a>
+          </div>
+        </div>
+      </div>
+      <div class="pop-footer">
+        <a href="Location.html" class="main-pop-btn">
+          <button class="google-pop-btn"><img src="main/assets/google-icon.png" height="20px" width="20px">Search on Google
+            Maps</button>
+          <button class="professional-btn">Done</button>
+        </a>
+      </div>
+    </div>
+
+    <div id="success-popup" class="success-popup">
+      <h2>Success</h2>
+      <p>Your location has been set successfully!</p>
+    </div>
+
+
+
+
+    <!--searchbar-starts-->
+    <div class="search-container">
+      <form action="/search" method="get" class="search-form">
+        <div class="search-dropdown">
+          <select name="searchType" class="search-select" id="search-select" onchange="updatePlaceholder()">
+            <option value="all">All</option>
+            <option value="products">Products</option>
+            <option value="categories">Categories</option>
+            <option value="brands">Brands</option>
+          </select>
+        </div>
+        <input type="text" name="query" class="search-input" id="search-input" placeholder="Search Anything...">
+        <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+      </form>
+    </div>
+    <!--searchbar-end-->
+    <a href="#">
+      <div class="ReturnOrOrder-nav">Return <br> <B class="io">& Order</B></div>
+    </a>
+    <a href="../login.html">
+      <div class="account-nav"><i class="fa-solid fa-user"></i>Account</div>
+    </a>
+    <a href="#">
+      <div class="cart-nav">
+        <div class="cart">
+          <button id="cartButton">
+            <i class="fas fa-shopping-cart"></i> $<span id="cartTotal">0.00</span>
+          </button>
+          <div id="cartDropdown" class="cart-dropdown">
+            <ul id="cartItems"></ul>
+            <div class="cart-total">
+              Total: $<span id="cartTotalDropdown">0.00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <div class="sub-navbar">
+    <div class="sub-dropdown">
+      <a href="#" class="sub-dropdown-link" onclick="toggleDropdown(event)">All <i class="fas fa-chevron-down"></i></a>
+      <div class="dropdown-content">
+        <a href="#">Service 1</a>
+        <a href="#">Service 2</a>
+        <a href="#">Service 3</a>
+        <a href="#">Service 4</a>
+        <a href="#">Service 5</a>
+        <a href="#">Service 6</a>
+        <a href="#">Service 7</a>
+        <a href="#">Service 8</a>
+        <a href="#">Service 9</a>
+        <a href="#">Service 10</a>
+      </div>
+    </div>
+    <a href="#">Hot Deals</a>
+    <a href="../login.html">Sell</a>
+    <a href="../myStore.html">Create Store</a>
+    <a href="../customer-services.html">Customer Services</a>
+  </div>
+    
+    
+
+
+
+             
+        
+  
+  
+  
+  
+    
+          
+      
+  
+  
+  <main>
+    <div class="sort-container">
+        <div class="gbzio">Shoes:</div>
+        <div>
+            <label for="category">Sort by Category:</label>
+            <select id="category" onchange="filterShoes()">
+                <option value="all">All</option>
+                <option value="category1">Category 1</option>
+                <option value="category2">Category 2</option>
+                <option value="category3">Category 3</option>
+            </select>
+        </div>
+    </div>
+    <section class="phone-list" id="phone-list">
+        <!-- Shoe items with data-category attribute -->
+
+        <div class="phone-item" data-category="category2">
+            <img src="assets/Products-imgs/shoe-imginfo1.png" alt="Shoe 2">
+            <div class="phone-details">
+                <h2>Shoe 2</h2>
+                <p class="price">$89.99</p>
+                <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent viverra, justo ut tempus aliquam, neque eros facilisis purus, a faucibus elit erat sed leo. Nulla facilisi.</p>
+                <ul class="specs">
+                    <li><strong>Color:</strong> Brown</li>
+                    <li><strong>Material:</strong> Leather</li>
+                    <li><strong>Size:</strong> 9</li>
+                    <li><strong>Year:</strong> 2021</li>
+                </ul>
+                <button class="buy-now">Buy Now</button>
+            </div>
+        </div>
+        <div class="phone-item" data-category="category1">
+            <img src="assets/Products-imgs/shoe-imginfo2.png" alt="Shoe 1">
+            <div class="phone-details">
+                <h2>Shoe 1</h2>
+                <p class="price">$99.99</p>
+                <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent viverra, justo ut tempus aliquam, neque eros facilisis purus, a faucibus elit erat sed leo. Nulla facilisi.</p>
+                <ul class="specs">
+                    <li><strong>Color:</strong> Black</li>
+                    <li><strong>Material:</strong> Suede</li>
+                    <li><strong>Size:</strong> 10</li>
+                    <li><strong>Year:</strong> 2022</li>
+                </ul>
+                <button class="buy-now">Buy Now</button>
+            </div>
+        </div>
+        <div class="phone-item" data-category="category1">
+            <img src="assets/Products-imgs/shoe-imginfo3.png" alt="Shoe 3">
+            <div class="phone-details">
+                <h2>Shoe 3</h2>
+                <p class="price">$75.99</p>
+                <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent viverra, justo ut tempus aliquam, neque eros facilisis purus, a faucibus elit erat sed leo. Nulla facilisi.</p>
+                <ul class="specs">
+                    <li><strong>Color:</strong> White</li>
+                    <li><strong>Material:</strong> Canvas</li>
+                    <li><strong>Size:</strong> 8</li>
+                    <li><strong>Year:</strong> 2020</li>
+                </ul>
+                <button class="buy-now">Buy Now</button>
+            </div>
+        </div>
+        <div class="phone-item" data-category="category1">
+            <img src="assets/Products-imgs/shoe-imginfo4.png" alt="Shoe 4">
+            <div class="phone-details">
+                <h2>Shoe 4</h2>
+                <p class="price">$109.99</p>
+                <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent viverra, justo ut tempus aliquam, neque eros facilisis purus, a faucibus elit erat sed leo. Nulla facilisi.</p>
+                <ul class="specs">
+                    <li><strong>Color:</strong> Yellow</li>
+                    <li><strong>Material:</strong> Leather</li>
+                    <li><strong>Size:</strong> 11</li>
+                    <li><strong>Year:</strong> 2023</li>
+                </ul>
+                <button class="buy-now">Buy Now</button>
+            </div>
+        </div>
+        <div class="phone-item" data-category="category1">
+            <img src="assets/Products-imgs/shoe-imginfo5.png" alt="Shoe 5">
+            <div class="phone-details">
+                <h2>Shoe 5</h2>
+                <p class="price">$79.99</p>
+                <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent viverra, justo ut tempus aliquam, neque eros facilisis purus, a faucibus elit erat sed leo. Nulla facilisi.</p>
+                <ul class="specs">
+                    <li><strong>Color:</strong> Red</li>
+                    <li><strong>Material:</strong> Mesh</li>
+                    <li><strong>Size:</strong> 7</li>
+                    <li><strong>Year:</strong> 2019</li>
+                </ul>
+                <button class="buy-now">Buy Now</button>
+            </div>
+        </div>
+        <div class="phone-item" data-category="category1">
+            <img src="assets/Products-imgs/shoe-imginfo6.png" alt="Shoe 6">
+            <div class="phone-details">
+                <h2>Shoe 6</h2>
+                <p class="price">$120.99</p>
+                <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent viverra, justo ut tempus aliquam, neque eros facilisis purus, a faucibus elit erat sed leo. Nulla facilisi.</p>
+                <ul class="specs">
+                    <li><strong>Color:</strong> Green</li>
+                    <li><strong>Material:</strong> Synthetic</li>
+                    <li><strong>Size:</strong> 10</li>
+                    <li><strong>Year:</strong> 2024</li>
+                </ul>
+                <button class="buy-now">Buy Now</button>
+            </div>
+        </div>
+        <div class="phone-item" data-category="category3">
+            <img src="assets/Products-imgs/shoe-imginfo7.png" alt="Shoe 7">
+            <div class="phone-details">
+                <h2>Shoe 7</h2>
+                <p class="price">$85.99</p>
+                <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent viverra, justo ut tempus aliquam, neque eros facilisis purus, a faucibus elit erat sed leo. Nulla facilisi.</p>
+                <ul class="specs">
+                    <li><strong>Color:</strong> Blue</li>
+                    <li><strong>Material:</strong> Rubber</li>
+                    <li><strong>Size:</strong> 9</li>
+                    <li><strong>Year:</strong> 2018</li>
+                </ul>
+                <button class="buy-now">Buy Now</button>
+            </div>
+        </div>
+        <div class="phone-item" data-category="category3">
+            <img src="assets/Products-imgs/shoe-imginfo8.png" alt="Shoe 8">
+            <div class="phone-details">
+                <h2>Shoe 8</h2>
+                <p class="price">$129.99</p>
+                <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent viverra, justo ut tempus aliquam, neque eros facilisis purus, a faucibus elit erat sed leo. Nulla facilisi.</p>
+                <ul class="specs">
+                    <li><strong>Color:</strong> Purple</li>
+                    <li><strong>Material:</strong> Leather</li>
+                    <li><strong>Size:</strong> 11</li>
+                    <li><strong>Year:</strong> 2025</li>
+                </ul>
+                <button class="buy-now">Buy Now</button>
+            </div>
+        </div>
+        <!-- More Shoe items -->
+    </section>
+
+    <div class="load-buttons">
+        <button id="load-more" onclick="loadMore()">Load More</button>
+        <button id="load-less" onclick="loadLess()" style="display: none;">Load Less</button>
+    </div>
+</main>
+
+
+  
+  
+      
+  
+  
+
+  
+
+    
+
+
+
+
+
+
+    <footer>
+      <div class="footer-container">
+        <div class="footer-row">
+          <div class="footer-col">
+            <h4>Company</h4>
+            <ul>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Press Releases</a></li>
+              <li><a href="#">Blog</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Customer Service</h4>
+            <ul>
+              <li><a href="#">Help Center</a></li>
+              <li><a href="#">Returns</a></li>
+              <li><a href="#">Shipping</a></li>
+              <li><a href="#">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Follow Us</h4>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+          <div class="footer-col">
+            <h4>Contact</h4>
+            <ul>
+              <li><i class="fas fa-map-marker-alt"></i> 123 Main St, City, Country</li>
+              <li><i class="fas fa-phone-alt"></i> +123 456 7890</li>
+              <li><i class="fas fa-envelope"></i> info@yourcompany.com</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+  
+    <!-- Sub Footer -->
+    <div class="sub-footer">
+      <div class="sub-footer-container">
+        <p>&copy; 2024 YourCompany. All Rights Reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of
+            Service</a></p>
+      </div>
+    </div>
+  
+
+
+
+
+    <script>
+
+var itemsPerPage = 4;
+var currentItems = itemsPerPage;
+var currentCategory = 'all';
+var phoneItems = document.querySelectorAll(".phone-item");
+
+function updateItems() {
+    let visibleItems = 0;
+    phoneItems.forEach(function(item) {
+        if (currentCategory === 'all' || item.getAttribute('data-category') === currentCategory) {
+            if (visibleItems < currentItems) {
+                item.style.display = "flex";
+                visibleItems++;
+            } else {
+                item.style.display = "none";
+            }
+        } else {
+            item.style.display = "none";
+        }
+    });
+
+    var totalItems = document.querySelectorAll(`.phone-item[data-category="${currentCategory}"]`).length;
+    if (currentCategory === 'all') {
+        totalItems = phoneItems.length;
+    }
+
+    if (currentItems >= totalItems) {
+        document.getElementById("load-more").style.display = "none";
+        if (totalItems > itemsPerPage) {
+            document.getElementById("load-less").style.display = "inline-block";
+        }
+    } else {
+        document.getElementById("load-more").style.display = "inline-block";
+    }
+
+    if (currentItems <= itemsPerPage) {
+        document.getElementById("load-less").style.display = "none";
+    }
+}
+
+function loadMore() {
+    currentItems += itemsPerPage;
+    updateItems();
+}
+
+function loadLess() {
+    currentItems = itemsPerPage;
+    updateItems();
+}
+
+function filterShoes() {
+    currentCategory = document.getElementById("category").value;
+    currentItems = itemsPerPage;
+    updateItems();
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    updateItems();
+});
+
+    
+
+
+      
+       
+    </script>
+    <script src="Js/script.js"></script>
+</body>
+</html>

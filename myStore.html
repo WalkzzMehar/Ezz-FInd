@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="main/Css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Source Sans Pro' rel='stylesheet'>
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <title>Create store</title>
+  <style>
+
+.nav-random {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.logo-random {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.nav-links-random {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links-random li {
+    margin-left: 1rem;
+}
+
+.nav-links-random a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.main-random {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.section-random {
+    margin-bottom: 2rem;
+}
+
+.heading-random {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.form-random {
+    margin-bottom: 2rem;
+}
+
+.form-group-random {
+    margin-bottom: 1rem;
+}
+
+.label-random {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.input-random, .textarea-random, .button-random {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.textarea-random {
+    height: 100px;
+    resize: vertical;
+}
+
+.button-random {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.button-random:hover {
+    background-color: #218838;
+}
+
+.product-list-random {
+    border-top: 1px solid #ddd;
+    padding-top: 1rem;
+}
+
+.product-item-random {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding: 1rem 0;
+}
+
+.product-image-random {
+    flex: 1;
+    max-width: 150px;
+    margin-right: 1rem;
+}
+
+.product-details-random {
+    flex: 3;
+}
+
+.product-details-random h3 {
+    margin: 0 0 0.5rem 0;
+}
+
+.product-details-random p {
+    margin: 0.2rem 0;
+}
+
+
+  </style>
+</head>
+
+<body>
+
+
+    <!---->
+  <div class="navbar">
+    <a href="index.html" class="logo">Logo</a>
+    <div class="location-btn">
+      <div class="location-nav"><i class="fa-solid fa-location-dot"></i>
+        <div id="location-pop">Set Your <br>Location</div>
+      </div>
+    </div>
+<button id="loc-done" class="loc-done">
+  <i class="fa-solid fa-location-dot"></i>
+</button>
+
+
+    <div id="overlay">
+      <div id="loc-popup" class="loc-popup">
+        <div class="pop-header">
+          <h2>Choose your location</h2>
+          <button class="closePopupButton"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="pop-main">
+          <div>
+            <p>Delivery options and delivery speeds may vary for different locations</p>
+          </div>
+          <div>
+            <form onsubmit="return getCity()" class="zip-code">
+              <label for="zip">Zip Code:</label>
+              <div class="zip-zip">
+                <input type="text" id="zip" name="zip" required>
+                <button type="submit" class="zip-sub-btn">Submit</button>
+              </div>
+            </form>
+            <p id="result"></p>
+          </div>
+          <div class="dropdown-shiping-container">
+            <label>Ship outside:</label>
+            <input type="text" placeholder="Select or type a country..." id="countryInput" onclick="toggleDropdown()">
+            <div id="shiping-dropdown" class="shiping-dropdown">
+              <a href="#" onclick="selectCountry('United States')">United States</a>
+              <a href="#" onclick="selectCountry('Canada')">Canada</a>
+              <a href="#" onclick="selectCountry('United Kingdom')">United Kingdom</a>
+              <a href="#" onclick="selectCountry('Australia')">Australia</a>
+              <a href="#" onclick="selectCountry('Germany')">Germany</a>
+            </div>
+          </div>
+          
+          
+        </div>
+        <div class="pop-footer">
+          <div class="main-pop-btn">
+            <a href="Location.html"><button class="google-pop-btn"><img src="main/assets/google-icon.png" height="20px" width="20px">Search on Google Maps</button></a>
+            <button class="professional-btn">Done</button>
+          </div>
+        </div>
+      </div>
+    
+      <div id="success-popup" class="success-popup">
+        <h2>Success</h2>
+        <p>Your location has been set successfully!</p>
+      </div>
+    </div>
+
+    
+
+
+
+    <!--searchbar-starts-->
+    <div class="search-container">
+      <form action="/search" method="get" class="search-form">
+        <div class="search-dropdown">
+          <select name="searchType" class="search-select" id="search-select" onchange="updatePlaceholder()">
+            <option value="all">All</option>
+            <option value="products">Products</option>
+            <option value="categories">Categories</option>
+            <option value="brands">Brands</option>
+          </select>
+        </div>
+        
+        <input type="text" name="query" class="search-input" id="search-input" placeholder="Search Anything...">
+        <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+      
+        
+      </form>
+    </div>
+    <!--searchbar-end-->
+
+
+
+
+
+   
+  
+
+
+
+
+
+    <div class="a-grade">
+      <a class="ReturnOrOrder-nav" href="">Return <br> <B class="io">& Order</B></a>
+    </div>
+    <div class="a-grade">
+      <a class="account-nav" href="login.html"><i class="fa-solid fa-user"></i>Account</a>
+    </div>
+
+    <a href="#">
+      <div class="cart-nav" id="cart-nav">
+        <button type="submit" class="after-search-icon"><i class="fas fa-search"></i></button>
+        <div class="cart">
+          <button id="cartButton">
+            <i class="fas fa-shopping-cart"></i> $<span id="cartTotal">0.00</span>
+          </button>
+          <div id="cartDropdown" class="cart-dropdown">
+            <ul id="cartItems"></ul>
+            <div class="cart-total">
+              Total: $<span id="cartTotalDropdown">0.00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <div class="sub-navbar">
+    <div class="sub-dropdown">
+      <div onclick="toggleDropdown(event)">
+        <a href="#" class="sub-dropdown-link">All <i class="fas fa-chevron-down"></i></a>
+      </div>
+      <div class="dropdown-content">
+        <a href="#">Service 1</a>
+        <a href="#">Service 2</a>
+        <a href="#">Service 3</a>
+        <a href="#">Service 4</a>
+        <a href="#">Service 5</a>
+        <a href="#">Service 6</a>
+        <a href="#">Service 7</a>
+        <a href="#">Service 8</a>
+        <a href="#">Service 9</a>
+        <a href="#">Service 10</a>
+      </div>
+    </div>
+    <a href="#">Hot Deals</a>
+    <a href="login.html">Sell</a>
+    <a href="#">Create Store</a>
+    <a href="customer-services.html">Customer Services</a>
+  </div>
+ 
+      <main class="main-random">
+          <section class="section-random" id="store-creation">
+              <h1 class="heading-random">Create Your Store</h1>
+              <form id="store-form" class="form-random">
+                  <div class="form-group-random">
+                      <label for="store-name" class="label-random">Store Name:</label>
+                      <input type="text" id="store-name" name="store-name" class="input-random" required>
+                  </div>
+                  <div class="form-group-random">
+                      <label for="store-description" class="label-random">Store Description:</label>
+                      <textarea id="store-description" name="store-description" class="textarea-random" required></textarea>
+                  </div>
+                  <button type="submit" class="button-random">Create Store</button>
+              </form>
+          </section>
+          <section class="section-random" id="product-management">
+              <h1 class="heading-random">Manage Products</h1>
+              <form id="product-form" class="form-random">
+                  <div class="form-group-random">
+                      <label for="product-link" class="label-random">Product Link:</label>
+                      <input type="url" id="product-link" name="product-link" class="input-random" required>
+                  </div>
+                  <button type="submit" class="button-random">Add Product</button>
+              </form>
+              <div id="product-list" class="product-list-random">
+                  <!-- Products will be listed here -->
+              </div>
+          </section>
+      </main>
+     
+  
+
+
+
+  <!-- Main Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-row">
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Press Releases</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Customer Service</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="#">Shipping</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Follow Us</h4>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><i class="fas fa-map-marker-alt"></i> 123 Main St, City, Country</li>
+            <li><i class="fas fa-phone-alt"></i> +123 456 7890</li>
+            <li><i class="fas fa-envelope"></i> info@yourcompany.com</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Sub Footer -->
+  <div class="sub-footer">
+    <div class="sub-footer-container">
+      <p>&copy; 2024 YourCompany. All Rights Reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of
+          Service</a></p>
+    </div>
+  </div>
+
+
+
+  <script>
+    
+// location pop up
+const showPopupButtons = document.querySelectorAll('#location-pop, #loc-done'); 
+const closePopupButton = document.querySelector('.closePopupButton');
+const popup = document.getElementById('loc-popup');
+const overlay = document.getElementById('overlay');
+
+// Add event listeners to both buttons
+showPopupButtons.forEach(button => {
+button.addEventListener('click', () => {
+  popup.style.display = 'block';
+  overlay.style.display = 'block';
+});
+});
+
+closePopupButton.addEventListener('click', () => {
+popup.style.display = 'none';
+overlay.style.display = 'none';
+});
+
+overlay.addEventListener('click', (event) => {
+if (!popup.contains(event.target)) {
+  popup.style.display = 'none';
+  overlay.style.display = 'none';
+}
+});
+
+popup.addEventListener('click', (event) => {
+event.stopPropagation();
+});
+
+
+// Handle zip code form submission
+document.querySelector('.closePopupButton').addEventListener('click', function () {
+document.getElementById('overlay').style.display = 'none';
+document.getElementById('loc-popup').style.display = 'none';
+});
+
+function getCity() {
+const zipCode = document.getElementById('zip').value;
+const zipToCity = {
+  '10001': 'New York',
+  '94103': 'San Francisco',
+  '60601': 'Chicago',
+  '90001': 'Los Angeles',
+  '73301': 'Austin'
+};
+
+const city = zipToCity[zipCode];
+const resultElement = document.getElementById('result');
+
+if (city) {
+  document.getElementById('location-pop').innerHTML = `Deliver to: <br>${city}`;
+  showSuccessPopup();
+} else {
+  resultElement.textContent = `No city found for zip code ${zipCode}.`;
+}
+
+return false; // Prevent form submission
+}
+
+function showSuccessPopup() {
+document.getElementById('loc-popup').style.display = 'none';
+document.getElementById('success-popup').style.display = 'block';
+
+setTimeout(function () {
+  document.getElementById('success-popup').style.display = 'none';
+  document.getElementById('overlay').style.display = 'none';
+}, 2000);
+}
+
+// Handle shipping country selector
+function toggleDropdown() {
+document.getElementById("shiping-dropdown").classList.toggle("show");
+}
+
+function selectCountry(country) {
+document.getElementById("countryInput").value = country;
+document.getElementById("shiping-dropdown").classList.remove("show");
+}
+
+window.onclick = function(event) {
+if (!event.target.matches('#countryInput') && !event.target.closest('.shiping-dropdown')) {
+  var dropdowns = document.getElementsByClassName("shiping-dropdown");
+  for (var i = 0; i < dropdowns.length; i++) {
+    var openDropdown = dropdowns[i];
+    if (openDropdown.classList.contains('show')) {
+      openDropdown.classList.remove('show');
+    }
+  }
+}
+}
+
+document.getElementById("countryInput").addEventListener('input', function(event) {
+const dropdown = document.getElementById("shiping-dropdown");
+const filter = event.target.value.toUpperCase();
+const links = dropdown.getElementsByTagName('a');
+
+let anyVisible = false;
+for (let i = 0; i < links.length; i++) {
+  const txtValue = links[i].textContent || links[i].innerText;
+  if (txtValue.toUpperCase().indexOf(filter) > -1) {
+    links[i].style.display = "";
+    anyVisible = true;
+  } else {
+    links[i].style.display = "none";
+  }
+}
+dropdown.style.display = anyVisible ? "block" : "none";
+});
+
+  </script>
+
+    <script src="main/Js/script.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    
+  </body>
+  
+  </html>

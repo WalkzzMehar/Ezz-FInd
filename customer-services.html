@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="main/Css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Source Sans Pro' rel='stylesheet'>
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <title>Online Shopping Navbar</title>
+</head>
+
+<body>
+
+
+
+  <!---->
+  <div class="navbar">
+    <a href="index.html" class="logo">Logo</a>
+    <div class="location-btn">
+      <div class="location-nav"><i class="fa-solid fa-location-dot"></i>
+        <div id="location-pop">Set Your <br>Location</div>
+      </div>
+    </div>
+
+
+
+    <div id="overlay">
+      <div id="loc-popup" class="loc-popup">
+        <div class="pop-header">
+          <h2>Choose your location</h2>
+          <button class="closePopupButton"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="pop-main">
+          <div>
+            <p>Delivery options and delivery speeds may vary for different locations</p>
+          </div>
+          <div>
+            <form onsubmit="return getCity()" class="zip-code">
+              <label for="zip">Zip Code:</label>
+              <div class="zip-zip">
+                <input type="text" id="zip" name="zip" required>
+                <button type="submit" class="zip-sub-btn">Submit</button>
+              </div>
+            </form>
+            <p id="result"></p>
+          </div>
+          <div class="dropdown-shiping-container">
+            <label>Ship outside:</label>
+            <input type="text" placeholder="Select or type a country..." id="countryInput" onclick="toggleDropdown()">
+            <div id="shiping-dropdown" class="shiping-dropdown">
+              <a href="#" onclick="selectCountry('United States')">United States</a>
+              <a href="#" onclick="selectCountry('Canada')">Canada</a>
+              <a href="#" onclick="selectCountry('United Kingdom')">United Kingdom</a>
+              <a href="#" onclick="selectCountry('Australia')">Australia</a>
+              <a href="#" onclick="selectCountry('Germany')">Germany</a>
+            </div>
+          </div>
+          
+          
+        </div>
+        <div class="pop-footer">
+          <div class="main-pop-btn">
+            <a href="Location.html"><button class="google-pop-btn"><img src="main/assets/google-icon.png" height="20px" width="20px">Search on Google Maps</button></a>
+            <button class="professional-btn">Done</button>
+          </div>
+        </div>
+      </div>
+    
+      <div id="success-popup" class="success-popup">
+        <h2>Success</h2>
+        <p>Your location has been set successfully!</p>
+      </div>
+    </div>
+    
+
+
+
+    <!--searchbar-starts-->
+    <div class="search-container">
+      <form action="/search" method="get" class="search-form">
+        <div class="search-dropdown">
+          <select name="searchType" class="search-select" id="search-select" onchange="updatePlaceholder()">
+            <option value="all">All</option>
+            <option value="products">Products</option>
+            <option value="categories">Categories</option>
+            <option value="brands">Brands</option>
+          </select>
+        </div>
+        <input type="text" name="query" class="search-input" id="search-input" placeholder="Search Anything...">
+        <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+      </form>
+    </div>
+    <!--searchbar-end-->
+    <a href="#">
+      <div class="ReturnOrOrder-nav">Return <br> <B class="io">& Order</B></div>
+    </a>
+    <a href="login.html">
+      <div class="account-nav"><i class="fa-solid fa-user"></i>Account</div>
+    </a>
+    <a href="#">
+      <div class="cart-nav">
+        <div class="cart">
+          <button id="cartButton">
+            <i class="fas fa-shopping-cart"></i> $<span id="cartTotal">0.00</span>
+          </button>
+          <div id="cartDropdown" class="cart-dropdown">
+            <ul id="cartItems"></ul>
+            <div class="cart-total">
+              Total: $<span id="cartTotalDropdown">0.00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <div class="sub-navbar">
+    <div class="sub-dropdown">
+      <div onclick="toggleDropdown(event)">
+        <a href="#" class="sub-dropdown-link">All <i class="fas fa-chevron-down"></i></a>
+      </div>
+      <div class="dropdown-content">
+        <a href="#">Service 1</a>
+        <a href="#">Service 2</a>
+        <a href="#">Service 3</a>
+        <a href="#">Service 4</a>
+        <a href="#">Service 5</a>
+        <a href="#">Service 6</a>
+        <a href="#">Service 7</a>
+        <a href="#">Service 8</a>
+        <a href="#">Service 9</a>
+        <a href="#">Service 10</a>
+      </div>
+    </div>
+    <a href="#">Hot Deals</a>
+    <a href="login.html">Sell</a>
+    <a href="myStore.html">Create Store</a>
+    <a href="customer-services.html">Customer Services</a>
+  </div>
+
+
+
+
+
+    <div class="customer-service-container">
+        <section class="intro">
+            <h1>Customer Service</h1>
+            <p>We're here to help you with any questions or concerns you may have. Please choose from the options below to get the assistance you need.</p>
+        </section>
+        
+        <section class="contact-options">
+            <div class="option">
+                <i class="fas fa-phone"></i>
+                <h2>Call Us</h2>
+                <p>Our support team is available 24/7 to assist you.</p>
+                <p><strong>Phone:</strong> 1-800-123-4567</p>
+            </div>
+            <div class="option">
+                <i class="fas fa-envelope"></i>
+                <h2>Email Us</h2>
+                <p>Send us an email and we’ll get back to you within 24 hours.</p>
+                <p><strong>Email:</strong> support@onlineshop.com</p>
+            </div>
+            <div class="option">
+                <i class="fas fa-comments"></i>
+                <h2>Live Chat</h2>
+                <p>Chat with our customer service representatives for immediate assistance.</p>
+                <button class="chat-button">Start Live Chat</button>
+            </div>
+        </section>
+        
+        <section class="faq">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <h3>How do I track my order?</h3>
+                <p>To track your order, log into your account and go to the Orders section. Click on the order you want to track to see its status and tracking information.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What is your return policy?</h3>
+                <p>We accept returns within 30 days of purchase. The item must be in its original condition and packaging. Please visit our Returns page for more details.</p>
+            </div>
+            <div class="faq-item">
+                <h3>How can I change my shipping address?</h3>
+                <p>You can change your shipping address before your order is shipped. Go to your account, select the order, and update the shipping address.</p>
+            </div>
+        </section>
+
+        <section class="contact-form">
+            <h2>Contact Form</h2>
+            <form action="#">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="submit-button">Submit</button>
+            </form>
+        </section>
+    </div>
+
+
+
+
+    <footer>
+        <div class="footer-container">
+          <div class="footer-row">
+            <div class="footer-col">
+              <h4>Company</h4>
+              <ul>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Careers</a></li>
+                <li><a href="#">Press Releases</a></li>
+                <li><a href="#">Blog</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h4>Customer Service</h4>
+              <ul>
+                <li><a href="#">Help Center</a></li>
+                <li><a href="#">Returns</a></li>
+                <li><a href="#">Shipping</a></li>
+                <li><a href="#">Contact Us</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h4>Follow Us</h4>
+              <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+              </div>
+            </div>
+            <div class="footer-col">
+              <h4>Contact</h4>
+              <ul>
+                <li><i class="fas fa-map-marker-alt"></i> 123 Main St, City, Country</li>
+                <li><i class="fas fa-phone-alt"></i> +123 456 7890</li>
+                <li><i class="fas fa-envelope"></i> info@yourcompany.com</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>
+    
+      <!-- Sub Footer -->
+      <div class="sub-footer">
+        <div class="sub-footer-container">
+          <p>&copy; 2024 YourCompany. All Rights Reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of
+              Service</a></p>
+        </div>
+      </div>
+
+
+      <script>
+  
+
+
+
+
+
+
+// location pop up
+const showPopupButtons = document.querySelectorAll('#location-pop, #loc-done'); 
+const closePopupButton = document.querySelector('.closePopupButton');
+const popup = document.getElementById('loc-popup');
+const overlay = document.getElementById('overlay');
+
+// Add event listeners to both buttons
+showPopupButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    popup.style.display = 'block';
+    overlay.style.display = 'block';
+  });
+});
+
+closePopupButton.addEventListener('click', () => {
+  popup.style.display = 'none';
+  overlay.style.display = 'none';
+});
+
+overlay.addEventListener('click', (event) => {
+  if (!popup.contains(event.target)) {
+    popup.style.display = 'none';
+    overlay.style.display = 'none';
+  }
+});
+
+popup.addEventListener('click', (event) => {
+  event.stopPropagation();
+});
+
+
+// Handle zip code form submission
+document.querySelector('.closePopupButton').addEventListener('click', function () {
+  document.getElementById('overlay').style.display = 'none';
+  document.getElementById('loc-popup').style.display = 'none';
+});
+
+function getCity() {
+  const zipCode = document.getElementById('zip').value;
+  const zipToCity = {
+    '10001': 'New York',
+    '94103': 'San Francisco',
+    '60601': 'Chicago',
+    '90001': 'Los Angeles',
+    '73301': 'Austin'
+  };
+
+  const city = zipToCity[zipCode];
+  const resultElement = document.getElementById('result');
+
+  if (city) {
+    document.getElementById('location-pop').innerHTML = `Deliver to: <br>${city}`;
+    showSuccessPopup();
+  } else {
+    resultElement.textContent = `No city found for zip code ${zipCode}.`;
+  }
+
+  return false; // Prevent form submission
+}
+
+function showSuccessPopup() {
+  document.getElementById('loc-popup').style.display = 'none';
+  document.getElementById('success-popup').style.display = 'block';
+
+  setTimeout(function () {
+    document.getElementById('success-popup').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
+  }, 2000);
+}
+
+// Handle shipping country selector
+function toggleDropdown() {
+  document.getElementById("shiping-dropdown").classList.toggle("show");
+}
+
+function selectCountry(country) {
+  document.getElementById("countryInput").value = country;
+  document.getElementById("shiping-dropdown").classList.remove("show");
+}
+
+window.onclick = function(event) {
+  if (!event.target.matches('#countryInput') && !event.target.closest('.shiping-dropdown')) {
+    var dropdowns = document.getElementsByClassName("shiping-dropdown");
+    for (var i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+
+document.getElementById("countryInput").addEventListener('input', function(event) {
+  const dropdown = document.getElementById("shiping-dropdown");
+  const filter = event.target.value.toUpperCase();
+  const links = dropdown.getElementsByTagName('a');
+
+  let anyVisible = false;
+  for (let i = 0; i < links.length; i++) {
+    const txtValue = links[i].textContent || links[i].innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      links[i].style.display = "";
+      anyVisible = true;
+    } else {
+      links[i].style.display = "none";
+    }
+  }
+  dropdown.style.display = anyVisible ? "block" : "none";
+});
+
+
+    </script>
+      <script src="main/Js/script.js"></script>
+    
+</body>
+</html>

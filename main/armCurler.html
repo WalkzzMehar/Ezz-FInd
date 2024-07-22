@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="Css/style.css">
+  <link href='https://fonts.googleapis.com/css?family=Source Sans Pro' rel='stylesheet'>
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <title>Online Shopping Navbar</title>
+
+  <style>
+    .swiper-1 {
+      width: 240px;
+      height: 320px;
+    }
+
+    .swiper-slide {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 18px;
+      font-size: 22px;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .swiper-slide {
+      background-color: #fff;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <!---->
+  <div class="navbar">
+    <a href="../index.html" class="logo">Logo</a>
+    <div class="location-btn">
+      <div class="location-nav"><i class="fa-solid fa-location-dot"></i>
+        <div id="location-pop">Set Your <br>Location</div>
+      </div>
+    </div>
+
+
+
+    <div id="overlay"></div>
+    <div id="loc-popup" class="loc-popup">
+      <div class="pop-header">
+        <h2>Choose your location</h2>
+        <button class="closePopupButton"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="pop-main">
+        <div>
+          <p>Delivery options and delivery speeds may vary for different locations</p>
+        </div>
+        <div>
+          <form onsubmit="return getCity()" class="zip-code">
+            <label for="zip">Zip Code:</label>
+            <div class="zip-zip">
+              <input type="text" id="zip" name="zip" required>
+              <button type="submit" class="zip-sub-btn">Submit</button>
+            </div>
+          </form>
+          <p id="result"></p>
+        </div>
+        <div class="dropdown-shiping-container">
+          <label>Ship outside:</label>
+          <input type="text" placeholder="Select a country..." id="countryInput" readonly onclick="toggleDropdown()">
+          <div id="shiping-dropdown" class="shiping-dropdown">
+            <a href="#" onclick="selectCountry('United States')">United States</a>
+            <a href="#" onclick="selectCountry('Canada')">Canada</a>
+            <a href="#" onclick="selectCountry('United Kingdom')">United Kingdom</a>
+            <a href="#" onclick="selectCountry('Australia')">Australia</a>
+            <a href="#" onclick="selectCountry('Germany')">Germany</a>
+          </div>
+        </div>
+      </div>
+      <div class="pop-footer">
+        <a href="Location.html" class="main-pop-btn">
+          <button class="google-pop-btn"><img src="main/assets/google-icon.png" height="20px" width="20px">Search on Google
+            Maps</button>
+          <button class="professional-btn">Done</button>
+        </a>
+      </div>
+    </div>
+
+    <div id="success-popup" class="success-popup">
+      <h2>Success</h2>
+      <p>Your location has been set successfully!</p>
+    </div>
+
+
+
+
+    <!--searchbar-starts-->
+    <div class="search-container">
+      <form action="/search" method="get" class="search-form">
+        <div class="search-dropdown">
+          <select name="searchType" class="search-select" id="search-select" onchange="updatePlaceholder()">
+            <option value="all">All</option>
+            <option value="products">Products</option>
+            <option value="categories">Categories</option>
+            <option value="brands">Brands</option>
+          </select>
+        </div>
+        <input type="text" name="query" class="search-input" id="search-input" placeholder="Search Anything...">
+        <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+      </form>
+    </div>
+    <!--searchbar-end-->
+    <a href="#">
+      <div class="ReturnOrOrder-nav">Return <br> <B class="io">& Order</B></div>
+    </a>
+    <a href="../login.html">
+      <div class="account-nav"><i class="fa-solid fa-user"></i>Account</div>
+    </a>
+    <a href="#">
+      <div class="cart-nav">
+        <div class="cart">
+          <button id="cartButton">
+            <i class="fas fa-shopping-cart"></i> $<span id="cartTotal">0.00</span>
+          </button>
+          <div id="cartDropdown" class="cart-dropdown">
+            <ul id="cartItems"></ul>
+            <div class="cart-total">
+              Total: $<span id="cartTotalDropdown">0.00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <div class="sub-navbar">
+    <div class="sub-dropdown">
+      <a href="#" class="sub-dropdown-link" onclick="toggleDropdown(event)">All <i class="fas fa-chevron-down"></i></a>
+      <div class="dropdown-content">
+        <a href="#">Service 1</a>
+        <a href="#">Service 2</a>
+        <a href="#">Service 3</a>
+        <a href="#">Service 4</a>
+        <a href="#">Service 5</a>
+        <a href="#">Service 6</a>
+        <a href="#">Service 7</a>
+        <a href="#">Service 8</a>
+        <a href="#">Service 9</a>
+        <a href="#">Service 10</a>
+      </div>
+    </div>
+    <a href="#">Hot Deals</a>
+    <a href="../login.html">Sell</a>
+    <a href="../myStore.html">Create Store</a>
+    <a href="../customer-services.html">Customer Services</a>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <div class="xenox-container" >
+          <div class="xenox-main">
+            <div class="xenox-image">
+                <div class="swiper-1 mySwiper">
+                    <div class="swiper-wrapper">
+                      <div class="swiper-slide"><img src="assets/Products-imgs/gym-img14.png"></div>
+                      <div class="swiper-slide"><img src="#"></div>
+                      <div class="swiper-slide"><img src="#"></div>
+                      <div class="swiper-slide"><img src="#"></div>
+                      <div class="swiper-slide"><img src="#"></div>
+                      <div class="swiper-slide"><img src="#"></div>
+                      <div class="swiper-slide"><img src="#"></div>
+                      <div class="swiper-slide"><img src="#"></div>
+                      <div class="swiper-slide"><img src="#"></div>
+                    </div>
+                  </div>
+              </div>
+              <div class="xenox-price-card">
+                  <div class="xenox-card-content">
+                      <div class="xenox-price">
+                          <h2>Price</h2>
+                          <p>$20.00</p>
+                      </div>
+                      <div class="xenox-reviews">
+                          <h2>Customer Reviews</h2>
+                          <p>Review 1: "This product is great!"</p>
+                          <p>Review 2: "Excellent value for the price."</p>
+                      </div>
+                      <div class="xenox-faq">
+                          <h2>Frequently Asked Questions</h2>
+                          <p><strong>Q:</strong> What is the warranty period?<br><strong>A:</strong> The product comes with a one-year warranty.</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="xenox-info">
+              <h1 class="xenox-name">arm curler</h1>
+              <p class="xenox-description">Product description goes here. It provides a detailed overview of the product, highlighting its main features and benefits.</p>
+              <div class="xenox-features">
+                  <h2>Key Features</h2>
+                  <ul>
+                      <li>Feature 1</li>
+                      <li>Feature 2</li>
+                      <li>Feature 3</li>
+                  </ul>
+              </div>
+              <div class="xenox-specifications">
+                  <h2>Specifications</h2>
+                  <ul>
+                      <li>Dimension: 10x10x10 cm</li>
+                      <li>Weight: 1 kg</li>
+                      <li>Material: Plastic</li>
+                  </ul>
+              </div>
+              <div class="xenox-manufacturer">
+                  <h2>Manufacturer Information</h2>
+                  <p>Manufactured by XYZ Corp.</p>
+              </div>
+              <div class="xenox-warranty">
+                  <h2>Warranty Information</h2>
+                  <p>One-year warranty covering manufacturing defects.</p>
+              </div>
+          </div>
+    
+
+
+          <div class="xenox-info">
+            <div class="price-slider">
+                <p class="price-slider-heading" style="font-size: 26px;">Product you may also like</p>
+                <div class="product-slider-container">
+                  <div class="product-slider" id="uniqueProductSlider">
+                    <div class="product-card" data-id="1" data-price="10.00" data-image="assets/Products-imgs/gym-img1.png">
+                      <div class="img-container">
+                        <img src="assets/Products-imgs/gym-img1.png" alt="Product 1">
+                        <div class="favorite-btn"><i class="fa-solid fa-heart"></i></div>
+                      </div>
+                      <div class="card-content">
+                        <p class="card-content-price">$10.00</p>
+                        <p class="card-content-info"><b class="card-content-name">Hand Gripler</b>, dolor sit amet consectetur
+                          adipisicing elit. Consequuntur, dicta.</p>
+                      </div>
+                      <button class="add-to-cart">Add to Cart</button>
+                      <div class="quantity-controls" style="display: none;">
+                        <button class="decrement"><i class="fas fa-minus"></i></button>
+                        <span class="quantity">1</span>
+                        <button class="increment">+</button>
+                      </div>
+                    </div>
+                    <div class="product-card" data-id="2" data-price="30.00" data-image="assets/Products-imgs/gym-img2.png">
+                      <div class="img-container">
+                        <img src="assets/Products-imgs/gym-img2.png" alt="Product 2">
+                        <div class="favorite-btn"><i class="fa-solid fa-heart"></i></div>
+                      </div>
+                      <div class="card-content">
+                        <p class="card-content-price">$30.00</p>
+                        <p class="card-content-info"><b class="card-content-name">Hand Griplers</b>, dolor sit amet consectetur
+                          adipisicing elit. Consequuntur, dicta.</p>
+                      </div>
+                      <button class="add-to-cart">Add to Cart</button>
+                      <div class="quantity-controls" style="display: none;">
+                        <button class="decrement"><i class="fas fa-minus"></i></button>
+                        <span class="quantity">1</span>
+                        <button class="increment">+</button>
+                      </div>
+                    </div>
+                    <div class="product-card" data-id="3" data-price="40.00" data-image="assets/Products-imgs/gym-img3.png">
+                      <div class="img-container">
+                        <img src="assets/Products-imgs/gym-img3.png" alt="Product 3">
+                        <div class="favorite-btn"><i class="fa-solid fa-heart"></i></div> <!-- Favorite button -->
+                      </div>
+                      <div class="card-content">
+                        <p class="card-content-price">$40.00</p>
+                        <p class="card-content-info"><b class="card-content-name">Hand Gripler</b>, dolor sit amet consectetur
+                          adipisicing elit. Consequuntur, dicta.</p>
+                      </div>
+                      <button class="add-to-cart">Add to Cart</button>
+                      <div class="quantity-controls" style="display: none;">
+                        <button class="decrement"><i class="fas fa-minus"></i></button>
+                        <span class="quantity">1</span>
+                        <button class="increment">+</button>
+                      </div>
+                    </div>
+                    <div class="product-card" data-id="4" data-price="140.00" data-image="assets/Products-imgs/gym-img4.png">
+                      <div class="img-container">
+                        <img src="assets/Products-imgs/gym-img4.png" alt="Product 4">
+                        <div class="favorite-btn"><i class="fa-solid fa-heart"></i></div> <!-- Favorite button -->
+                      </div>
+                      <div class="card-content">
+                        <p class="card-content-price">$140.00</p>
+                        <p class="card-content-info"><b class="card-content-name">Hand Gripler</b>, dolor sit amet consectetur
+                          adipisicing elit. Consequuntur, dicta.</p>
+                      </div>
+                      <button class="add-to-cart">Add to Cart</button>
+                      <div class="quantity-controls" style="display: none;">
+                        <button class="decrement"><i class="fas fa-minus"></i></button>
+                        <span class="quantity">1</span>
+                        <button class="increment">+</button>
+                      </div>
+                    </div>
+                    <div class="product-card" data-id="5" data-price="69.00" data-image="assets/Products-imgs/gym-img5.png">
+                      <div class="img-container">
+                        <img src="assets/Products-imgs/gym-img5.png" alt="Product 5">
+                        <div class="favorite-btn"><i class="fa-solid fa-heart"></i></div> <!-- Favorite button -->
+                      </div>
+                      <div class="card-content">
+                        <p class="card-content-price">$69.00</p>
+                        <p class="card-content-info"><b class="card-content-name">Hand Gripler</b>, dolor sit amet consectetur
+                          adipisicing elit. Consequuntur, dicta.</p>
+                      </div>
+                      <button class="add-to-cart">Add to Cart</button>
+                      <div class="quantity-controls" style="display: none;">
+                        <button class="decrement"><i class="fas fa-minus"></i></button>
+                        <span class="quantity">1</span>
+                        <button class="increment">+</button>
+                      </div>
+                    </div>
+                    <div class="product-card" data-id="6" data-price="34.00" data-image="assets/Products-imgs/gym-img6.png">
+                      <div class="img-container">
+                        <img src="assets/Products-imgs/gym-img6.png" alt="Product 6">
+                        <div class="favorite-btn"><i class="fa-solid fa-heart"></i></div> <!-- Favorite button -->
+                      </div>
+                      <div class="card-content">
+                        <p class="card-content-price">$34.00</p>
+                        <p class="card-content-info"><b class="card-content-name">Hand Gripler</b>, dolor sit amet consectetur
+                          adipisicing elit. Consequuntur, dicta.</p>
+                      </div>
+                      <button class="add-to-cart">Add to Cart</button>
+                      <div class="quantity-controls" style="display: none;">
+                        <button class="decrement"><i class="fas fa-minus"></i></button>
+                        <span class="quantity">1</span>
+                        <button class="increment">+</button>
+                      </div>
+                    </div>
+                    <div class="product-card" data-id="7" data-price="25.00" data-image="assets/Products-imgs/gym-img7.png">
+                      <div class="img-container">
+                        <img src="assets/Products-imgs/gym-img7.png" alt="Product 7">
+                        <div class="favorite-btn"><i class="fa-solid fa-heart"></i></div> <!-- Favorite button -->
+                      </div>
+                      <div class="card-content">
+                        <p class="card-content-price">$25.00</p>
+                        <p class="card-content-info"><b class="card-content-name">Hand Gripler</b>, dolor sit amet consectetur
+                          adipisicing elit. Consequuntur, dicta.</p>
+                      </div>
+                      <button class="add-to-cart">Add to Cart</button>
+                      <div class="quantity-controls" style="display: none;">
+                        <button class="decrement"><i class="fas fa-minus"></i></button>
+                        <span class="quantity">1</span>
+                        <button class="increment">+</button>
+                      </div>
+                    </div>
+                    <div class="product-card" data-id="8" data-price="100.00" data-image="assets/Products-imgs/gym-img8.png">
+                      <div class="img-container">
+                        <img src="assets/Products-imgs/gym-img8.png" alt="Product 8">
+                        <div class="favorite-btn"><i class="fa-solid fa-heart"></i></div> <!-- Favorite button -->
+                      </div>
+                      <div class="card-content">
+                        <p class="card-content-price">$100.00</p>
+                        <p class="card-content-info"><b class="card-content-name">Hand Gripler</b>, dolor sit amet consectetur
+                          adipisicing elit. Consequuntur, dicta.</p>
+                      </div>
+                      <button class="add-to-cart">Add to Cart</button>
+                      <div class="quantity-controls" style="display: none;">
+                        <button class="decrement"><i class="fas fa-minus"></i></button>
+                        <span class="quantity">1</span>
+                        <button class="increment">+</button>
+                      </div>
+                    </div>
+                    <div class="product-card" data-id="9" data-price="46.00" data-image="assets/Products-imgs/gym-img9.png">
+                      <div class="img-container">
+                        <img src="assets/Products-imgs/gym-img9.png" alt="Product 9">
+                        <div class="favorite-btn"><i class="fa-solid fa-heart"></i></div> <!-- Favorite button -->
+                      </div>
+                      <div class="card-content">
+                        <p class="card-content-price">$46.00</p>
+                        <p class="card-content-info"><b class="card-content-name">Hand Gripler</b>, dolor sit amet consectetur
+                          adipisicing elit. Consequuntur, dicta.</p>
+                      </div>
+                      <button class="add-to-cart">Add to Cart</button>
+                      <div class="quantity-controls" style="display: none;">
+                        <button class="decrement"><i class="fas fa-minus"></i></button>
+                        <span class="quantity">1</span>
+                        <button class="increment">+</button>
+                      </div>
+                    </div>
+                    <div class="product-card" data-id="10" data-price="199.00" data-image="assets/Products-imgs/gym-img10.png">
+                      <div class="img-container">
+                        <img src="assets/Products-imgs/gym-img10.png" alt="Product 10">
+                        <div class="favorite-btn"><i class="fa-solid fa-heart"></i></div> <!-- Favorite button -->
+                      </div>
+                      <div class="card-content">
+                        <p class="card-content-price">$199.00</p>
+                        <p class="card-content-info"><b class="card-content-name">Hand Gripler</b>, dolor sit amet consectetur
+                          adipisicing elit. Consequuntur, dicta.</p>
+                      </div>
+                      <button class="add-to-cart">Add to Cart</button>
+                      <div class="quantity-controls" style="display: none;">
+                        <button class="decrement"><i class="fas fa-minus"></i></button>
+                        <span class="quantity">1</span>
+                        <button class="increment">+</button>
+                      </div>
+                    </div>
+                    
+          
+                    <!-- Additional product cards go here -->
+                  </div>
+                  <div class="nav-button">
+                    <button id="prevButton2" onclick="prevProductSlide()"><i class="fas fa-chevron-left"></i></button>
+                    <button id="nextButton2" onclick="nextProductSlide()"><i class="fas fa-chevron-right"></i></button>
+                  </div>                    
+                </div>
+              </div>
+      </div>
+      </div>
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+     <footer>
+        <div class="footer-container">
+          <div class="footer-row">
+            <div class="footer-col">
+              <h4>Company</h4>
+              <ul>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Careers</a></li>
+                <li><a href="#">Press Releases</a></li>
+                <li><a href="#">Blog</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h4>Customer Service</h4>
+              <ul>
+                <li><a href="#">Help Center</a></li>
+                <li><a href="#">Returns</a></li>
+                <li><a href="#">Shipping</a></li>
+                <li><a href="#">Contact Us</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h4>Follow Us</h4>
+              <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+              </div>
+            </div>
+            <div class="footer-col">
+              <h4>Contact</h4>
+              <ul>
+                <li><i class="fas fa-map-marker-alt"></i> 123 Main St, City, Country</li>
+                <li><i class="fas fa-phone-alt"></i> +123 456 7890</li>
+                <li><i class="fas fa-envelope"></i> info@yourcompany.com</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>
+    
+      <!-- Sub Footer -->
+      <div class="sub-footer">
+        <div class="sub-footer-container">
+          <p>&copy; 2024 YourCompany. All Rights Reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of
+              Service</a></p>
+        </div>
+      </div>
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="Js/product.js"></script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+   
+
+    var swiper = new Swiper(".mySwiper", {
+      effect: "cards",
+      grabCursor: true,
+    });
+
+
+
+  </script>
+</body>
+
+</html>
